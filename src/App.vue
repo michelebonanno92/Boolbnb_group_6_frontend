@@ -11,7 +11,7 @@ import HomePage from './views/HomePage.vue';
 export default {
   data() {
     return { 
-      count: 0
+      count: 1
     }
   },
   // 2) Dichiarazione del componente
