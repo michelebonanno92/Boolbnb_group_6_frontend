@@ -1,0 +1,23 @@
+@use 'partials/reset' as *;
+@use 'partials/variables' as *;
+@use 'partials/mixins' as *;
+
+/* 
+    GENERAL
+*/
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.my-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 
+    APP
+*/
+main {
+  text-align: center;
+}
