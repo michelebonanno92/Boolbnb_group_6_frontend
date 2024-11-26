@@ -6,7 +6,9 @@
   3) Utilizzo del componente
 */
 // 1) Importazione del componente
-import HomePage from './views/HomePage.vue';
+import AppHeader from '../components/HomePage/AppHeader.vue';
+import AppMain from '../components/HomePage/AppMain.vue';
+import AppFooter from '../components/HomePage/AppFooter.vue';
 
 export default {
   data() {
@@ -16,7 +18,9 @@ export default {
   },
   // 2) Dichiarazione del componente
   components: {
-	HomePage
+    AppHeader,
+    AppMain,
+	AppFooter
   },
 
 }
@@ -25,11 +29,13 @@ export default {
 <template>
   <div>
     <!-- 3) Utilizzo del componente -->
-    <HomePage />
+    <AppHeader />
+    <AppMain />
+	<AppFooter />
     
   </div>
 </template>
 
 <style lang="scss">
-@use 'assets/scss/main' as *;
+@use '../assets/scss/main' as *;
 </style>
