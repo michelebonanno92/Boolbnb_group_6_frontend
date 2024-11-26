@@ -12,10 +12,25 @@ export default {
   <footer>
 
     <div class="container">
-      <div class="">
+
+      <div class="row">
+        
+        <div class="container text-center">
+          <div class="row align-items-start">
+            <div class="col">
+              Chi siamo
+            </div>
+            <div class="col">
+              Contatti
+            </div>
+            <div class="col">
+              F.A.Q.
+            </div>
+          </div>
+        </div>
 
       </div>
-
+      
     </div>
     
   </footer>
