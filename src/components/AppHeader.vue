@@ -2,7 +2,7 @@
 export default {
   data() {
     return { 
-      message: 'Prova'
+      message: 'Template Vite + Vue'
     }
   }
 }
