@@ -2,30 +2,36 @@
 export default {
   data() {
     return { 
-      message: 'Prova'
+      message: 'Footer'
     }
   }
 }
 </script>
 
 <template>
-  <header>
-    <h1>
-      {{ message }}
-    </h1>
-  </header>
+  <footer>
+
+    <div class="container">
+      <div class="">
+
+      </div>
+
+    </div>
+    
+  </footer>
+
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/partials/variables' as *;
 
-header {
-  background-color: $mainBgColor;
+footer {
+  background-color: red;
   text-align: center;
   padding: 20px 0;
 }
 
 h1 {
-  color: $mainColor;
+  color: black;
 }
 </style>
