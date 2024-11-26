@@ -6,9 +6,9 @@
   3) Utilizzo del componente
 */
 // 1) Importazione del componente
-import AppHeader from '../components/HomePage/AppHeader.vue';
-import AppMain from '../components/HomePage/AppMain.vue';
-import AppFooter from '../components/HomePage/AppFooter.vue';
+import AppHeader from '../components/Apartments/AppHeader.vue';
+import AppMain from '../components/Apartments/AppMain.vue';
+import AppFooter from '../components/Apartments/AppFooter.vue';
 
 export default {
   data() {
