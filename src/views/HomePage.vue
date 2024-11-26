@@ -20,7 +20,7 @@ export default {
   components: {
     AppHeader,
     AppMain,
-	AppFooter
+	  AppFooter
   },
 
 }
@@ -31,7 +31,7 @@ export default {
     <!-- 3) Utilizzo del componente -->
     <AppHeader />
     <AppMain />
-	<AppFooter />
+	  <AppFooter />
     
   </div>
 </template>
