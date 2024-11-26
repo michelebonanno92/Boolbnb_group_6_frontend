@@ -10,7 +10,7 @@ export default {
 
 <template>
   <header>
-    <h1>
+    <h1 class="mb-4">
       {{ message }}
     </h1>
   </header>
