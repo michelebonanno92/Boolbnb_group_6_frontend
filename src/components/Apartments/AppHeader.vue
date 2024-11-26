@@ -17,14 +17,14 @@ export default {
 				</div>
 				<div class="col d-flex justify-content-end align-items-center ">
 					<div>
-						<a href="" class="btn btn-danger me-4">
+						<router-link :to="{ name: 'home'}" class="btn btn-danger me-4">
 							HomePage
-						</a>
+						</router-link>
 					</div>
 					<div>
-						<a href="" class="btn btn-warning">
+						<router-link :to="{ }" class="btn btn-warning">
 							Login
-						</a>
+						</router-link>
 					</div>
 				</div>
 			</div>

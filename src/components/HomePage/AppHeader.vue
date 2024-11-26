@@ -18,7 +18,7 @@ export default {
 				<div class="col d-flex justify-content-end align-items-center ">
 					<div>
 						<!-- , params: { slug: project.slug}  -->
-						<router-link :to="{ name: 'apartment-show'}" class="btn btn-success me-4">
+						<router-link :to="{ name: 'apartments'}" class="btn btn-success me-4">
 							Appartamenti
 						</router-link>
 					</div>
