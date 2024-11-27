@@ -7,6 +7,7 @@ export default {
       suggestions: [],
       apiKey: 'KtAYjlAUfMLakTMNV7iootfwwERDicp1', // Inserisci la tua API Key qui
       apartments: [],
+      filteredApartments: [],
     }
   },
   mounted() {
@@ -27,9 +28,8 @@ export default {
       },
 
       // suggerimento ricerca
-    fetchSuggestions() {
-      // Effettua una chiamata API solo se l'utente ha digitato almeno 3 caratteri
-      if (this.searchQuery.length < 0) {
+      fetchSuggestions() {
+      if (this.searchQuery.length < 1) {
         this.suggestions = [];
         return;
       }
@@ -42,9 +42,9 @@ export default {
         .get(url, {
           params: {
             key: this.apiKey,
-            limit: 5, // Numero massimo di suggerimenti
-            language: "it-IT", // Lingua dei suggerimenti
-            // countrySet: "IT", // Limita ai risultati italiani
+            limit: 5,
+            language: "it-IT",
+            // countrySet: "IT",
           },
         })
         .then((response) => {
@@ -55,13 +55,41 @@ export default {
         });
     },
     selectSuggestion(suggestion) {
-      console.log("Suggerimento selezionato:", suggestion);
+      const latitude = suggestion.position.lat;
+      const longitude = suggestion.position.lon;
+
+      // Filtra gli appartamenti entro 10 km
+      this.filteredApartments = this.apartments
+        .map((apartment) => {
+          const distance = this.calculateDistance(
+            latitude,
+            longitude,
+            apartment.latitude,
+            apartment.longitude,
+          );
+          return { ...apartment, distance }; // Aggiunge la distanza all'appartamento
+        })
+        .filter((apartment) => apartment.distance <= 50); // Filtra per raggio
 
       // Aggiorna la barra di ricerca con il risultato selezionato
       this.searchQuery = suggestion.address.freeformAddress;
-
-      // Esegui ulteriori azioni come salvarlo o usarlo in un'altra funzione
       this.suggestions = [];
+    },
+    calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Raggio della Terra in km
+      const dLat = this.degToRad(lat2 - lat1);
+      const dLon = this.degToRad(lon2 - lon1);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.degToRad(lat1)) *
+          Math.cos(this.degToRad(lat2)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c; // Distanza in km
+    },
+    degToRad(deg) {
+      return deg * (Math.PI / 180);
     },
   },
 }
@@ -70,11 +98,45 @@ export default {
 <template>
   <main>
 
-    <div class="container">
+    <div class="search-container">
+    <input
+      v-model="searchQuery"
+      @input="fetchSuggestions"
+      placeholder="Cerca un indirizzo..."
+      class="search-bar"
+    />
+    <ul v-if="suggestions.length" class="suggestions-list">
+      <li
+        v-for="(suggestion, index) in suggestions"
+        :key="index"
+        @click="selectSuggestion(suggestion)"
+      >
+        {{ suggestion.address.freeformAddress }}
+      </li>
+    </ul>
+
+    <div v-if="filteredApartments.length">
+      <h3>Appartamenti trovati entro 10 km:</h3>
+      <ul>
+        <li v-for="apartment in filteredApartments" :key="apartment.id">
+          {{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
+          <div class="card">
+              <img :src=" apartment.full_image_url " class="card-img-top" :alt=" apartment.title ">
+              <div class="card-body">
+                <h5 class="card-title">{{ apartment.title }}</h5>
+                <p class="card-text">{{ apartment.description }}</p>
+              </div>
+            </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+    <!-- <div class="container">
 
       <div class="row">
-        
-        <div>
+        <div class="search-container">
           <input
             v-model="searchQuery"
             @input="fetchSuggestions"
@@ -90,6 +152,15 @@ export default {
               {{ suggestion.address.freeformAddress }}
             </li>
           </ul>
+
+          <div v-if="filteredApartments.length">
+            <h3>Appartamenti trovati entro 10 km:</h3>
+            <ul>
+              <li v-for="apartment in filteredApartments" :key="apartment.id">
+                {{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
+              </li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -111,7 +182,7 @@ export default {
 
       </div>
       
-    </div>
+    </div> -->
     
   </main>
 
@@ -148,5 +219,18 @@ export default {
 
 .suggestions-list li:hover {
   background: #f0f0f0;
+}
+
+ul {
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  padding: 5px;
+  background: #f8f8f8;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
 }
 </style>
