@@ -6,9 +6,27 @@ export default {
       searchQuery: '',
       suggestions: [],
       apiKey: 'KtAYjlAUfMLakTMNV7iootfwwERDicp1', // Inserisci la tua API Key qui
+      apartments: [],
     }
   },
+  mounted() {
+    this.getApartments();
+    },
   methods: {
+    // chiamata api apartments
+    getApartments() {
+        axios
+          .get('http://127.0.0.1:8000/api/apartments')
+          .then((res) => {
+            // console.log(res.data.apartments);
+
+            this.apartments = res.data.apartments;
+            // console.log(this.apartments);
+           
+          });
+      },
+
+      // suggerimento ricerca
     fetchSuggestions() {
       // Effettua una chiamata API solo se l'utente ha digitato almeno 3 caratteri
       if (this.searchQuery.length < 0) {
@@ -72,6 +90,23 @@ export default {
               {{ suggestion.address.freeformAddress }}
             </li>
           </ul>
+        </div>
+
+      </div>
+
+      <div class="row">
+        
+        <div  v-for="apartment in apartments" :key="apartment.id"
+        class="col-12 col-sm-6 col-md-4 col-lg-2">
+
+          <div class="card">
+            <img :src=" apartment.image " class="card-img-top" :alt=" apartment.title ">
+            <div class="card-body">
+              <h5 class="card-title">{{ apartment.title }}</h5>
+              <p class="card-text">{{ apartment.description }}</p>
+            </div>
+          </div>
+          
         </div>
 
       </div>
