@@ -98,7 +98,7 @@ export default {
 <template>
   <main>
 
-    <div class="search-container">
+    <div class="search-container mb-4">
     <input
       v-model="searchQuery"
       @input="fetchSuggestions"
@@ -117,72 +117,53 @@ export default {
 
     <div v-if="filteredApartments.length">
       <h3>Appartamenti trovati entro 10 km:</h3>
-      <ul>
-        <li v-for="apartment in filteredApartments" :key="apartment.id">
-          {{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
-          <div class="card">
-              <img :src=" apartment.full_image_url " class="card-img-top" :alt=" apartment.title ">
-              <div class="card-body">
-                <h5 class="card-title">{{ apartment.title }}</h5>
-                <p class="card-text">{{ apartment.description }}</p>
-              </div>
-            </div>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-
-    <!-- <div class="container">
-
-      <div class="row">
-        <div class="search-container">
-          <input
-            v-model="searchQuery"
-            @input="fetchSuggestions"
-            placeholder="Cerca un indirizzo..."
-            class="search-bar"
-          />
-          <ul v-if="suggestions.length" class="suggestions-list">
-            <li
-              v-for="(suggestion, index) in suggestions"
-              :key="index"
-              @click="selectSuggestion(suggestion)"
-            >
-              {{ suggestion.address.freeformAddress }}
-            </li>
-          </ul>
-
-          <div v-if="filteredApartments.length">
-            <h3>Appartamenti trovati entro 10 km:</h3>
-            <ul>
-              <li v-for="apartment in filteredApartments" :key="apartment.id">
-                {{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row">
-        
-        <div  v-for="apartment in apartments" :key="apartment.id"
-        class="col-12 col-sm-6 col-md-4 col-lg-2">
-
-          <div class="card">
-            <img :src=" apartment.full_image_url " class="card-img-top" :alt=" apartment.title ">
-            <div class="card-body">
-              <h5 class="card-title">{{ apartment.title }}</h5>
-              <p class="card-text">{{ apartment.description }}</p>
-            </div>
-          </div>
-          
-        </div>
-
-      </div>
+		<div class="container">
+			<div class="row">
+				
+				<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+					
+					<div>
+						<div class="card my-card p-3">
+							<div class="text-center">
+								<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
+							</div>
+							<h4 class="mb-2">
+								{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
+							</h4>
+							<ul class="text-start h-100">
+								<li>
+									Stanze: {{ apartment.rooms }}
+								</li>
+								<li>
+									Letti: {{ apartment.beds }}
+								</li>
+								<li>
+									Bagni: {{ apartment.toilets }}
+								</li>
+							</ul>
+							<div  class="mt-4 h-100">
+								<ul class="service-list">
+									<li>
+										placeholder servizi
+									</li>
+								</ul>
+							</div>
+							<div>
+								<a href="#" class="btn btn-outline-success w-100">Dettagli</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
       
-    </div> -->
+    </div>
+	<div v-else-if="!filteredApartments.length && !searchQuery == '' ">
+		
+    	<h3>Nessuno Appartamento trovato</h3>
+
+	</div>
+  </div>
     
   </main>
 
@@ -222,15 +203,26 @@ export default {
 }
 
 ul {
-  margin: 10px 0;
-  padding: 0;
-  list-style: none;
+    list-style: none;
+    padding: 0;
+    height: 100%;
+
+    .badge {
+        padding: 5px 10px;
+        margin-bottom: 4px;
+    }
+    
 }
 
-ul li {
-  padding: 5px;
-  background: #f8f8f8;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
+.my-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 5px 5px 10px 3px lightgray;
+    &:hover{
+        box-shadow: 5px 5px 10px 12px lightgray;
+
+    }
+	
 }
 </style>
