@@ -1,11 +1,29 @@
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return { 
-      
+      apartments: [],
+    };
+  },
+  mounted() {
+      this.getApartments();
+    },
+    methods: {
+      getApartments() {
+        axios
+          .get('http://127.0.0.1:8000/api/apartments')
+          .then((res) => {
+            // console.log(res.data.apartments);
+
+            this.apartments = res.data.apartments;
+            // console.log(this.apartments);
+           
+          });
+      },
     }
   }
-}
 </script>
 
 <template>
@@ -49,91 +67,18 @@ export default {
 
       <div class="row">
         
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div  v-for="apartment in apartments" :key="apartment.id"
+        class="col-12 col-sm-6 col-md-4 col-lg-2">
 
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 1</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
+          <div class="card">
+            <img :src=" apartment.image " class="card-img-top" :alt=" apartment.title ">
+            <div class="card-body">
+              <h5 class="card-title">{{ apartment.title }}</h5>
+              <p class="card-text">{{ apartment.description }}</p>
             </div>
           </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 2</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 3</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 4</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 5</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 6</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 7</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 8</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Appartamento 9</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-          </div>
-
-
+          
+        
         </div>
 
       </div>
