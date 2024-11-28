@@ -94,6 +94,9 @@ methods: {
 
 			this.filteredApartments = [...this.filteredApartments];
 
+			// Pulisce la lista delle suggestions
+			this.suggestions = [];
+
 		// Aggiorna la barra di ricerca con il risultato selezionato
 		// this.searchQuery = suggestion.address.freeformAddress;
 		// this.suggestions = [];
