@@ -164,7 +164,7 @@ export default {
 									</ul>
 								</div>
 								<div>
-									<router-link :to="{ name: 'apartment-show'}" class="btn btn-outline-success w-100">Dettagli</router-link>
+									<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
 								</div>
 							</div>
 						</div>

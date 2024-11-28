@@ -19,9 +19,9 @@ export default {
 				</div>
 				<div class="col d-flex justify-content-end align-items-center ">
 					<div>
-						<router-link href="http://127.0.0.1:8000/login" target="_blank" rel="noopener noreferrer" class="btn btn-warning">
+						<a href="http://127.0.0.1:8000/login" target="_blank" rel="noopener noreferrer" class="btn btn-warning">
 							Login
-						</router-link>
+						</a>
 					</div>
 				</div>
 			</div>
