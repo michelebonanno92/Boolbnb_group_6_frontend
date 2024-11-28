@@ -57,10 +57,14 @@ export default {
     selectSuggestion(suggestion) {
       const latitude = suggestion.position.lat;
       const longitude = suggestion.position.lon;
+      const address = suggestion.address.freeformAddress;
 
+      
+      // Reindirizza alla pagina `search-results` con i dati passati come query
+      
       // Filtra gli appartamenti entro 10 km
       this.filteredApartments = this.apartments
-        .map((apartment) => {
+      .map((apartment) => {
           const distance = this.calculateDistance(
             latitude,
             longitude,
@@ -70,8 +74,17 @@ export default {
           return { ...apartment, distance }; // Aggiunge la distanza all'appartamento
         })
         .filter((apartment) => apartment.distance <= 50); // Filtra per raggio
+        
 
-      // Aggiorna la barra di ricerca con il risultato selezionato
+        this.$router.push({
+          name: 'apartments',
+          query: {
+            lat: latitude,
+            lon: longitude,
+            address: address,
+          },
+        });
+        // Aggiorna la barra di ricerca con il risultato selezionato
       this.searchQuery = suggestion.address.freeformAddress;
       this.suggestions = [];
     },
@@ -91,6 +104,8 @@ export default {
     degToRad(deg) {
       return deg * (Math.PI / 180);
     },
+
+    
   },
 }
 </script>
@@ -106,7 +121,7 @@ export default {
 		class="search-bar"
 		/>
 		<ul v-if="suggestions.length" class="suggestions-list text-start">
-			<li
+			<li 
 				v-for="(suggestion, index) in suggestions"
 				:key="index"
 				@click="selectSuggestion(suggestion)"
