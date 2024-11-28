@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <footer>
+  <footer class="py-4 bg-body-tertiary">
 
     <div class="container">
 
@@ -40,13 +40,12 @@ export default {
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
 
+// footer {
+//   background-color: red;
+//   text-align: center;
+//   padding: 20px 0;
+// }
 footer {
-  background-color: red;
-  text-align: center;
-  padding: 20px 0;
-}
-
-h1 {
-  color: black;
+	height: $footerHeight;
 }
 </style>

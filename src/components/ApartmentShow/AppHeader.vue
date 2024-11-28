@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  	<header>
+  	<header class="bg-body-tertiary py-2 mb-4">
 		<div class="container">
 			<div class="row">
 				<div class="col d-flex justify-content-start">
@@ -35,9 +35,4 @@ export default {
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
 
-header {
-  	background-color: lightblue;
-  	text-align: center;
-  	padding: 20px 0;
-}
 </style>
