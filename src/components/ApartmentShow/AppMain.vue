@@ -32,7 +32,7 @@ export default {
     </div>
     <div class="container my-5">
       <div class="d-flex flex-row">
-        <button type="button" class="btn btn-secondary btn-lg">Torna indietro</button>
+        <router-link :to="{ name: 'apartments'}" class="btn btn-secondary btn-lg">Torna indietro</router-link>
       </div>
       <div class="d-flex flex-row-reverse">
         <button type="button" class="btn btn-primary btn-lg">Invia email</button>

@@ -13,7 +13,9 @@ export default {
 		<div class="container">
 			<div class="row">
 				<div class="col d-flex justify-content-start">
-					<h1 class="text-black mb-0">BoolBnb</h1>
+					<router-link :to="{ name: 'home'}" class="link-logo">
+						<h1 class="text-black  mb-0">BoolBnb</h1>
+					</router-link>
 				</div>
 				<div class="col d-flex justify-content-end align-items-center ">
 					<div>
@@ -37,5 +39,9 @@ export default {
 @use '../../assets/scss/partials/variables' as *;
 header {
 	height: $headerHeight;
+}
+
+.link-logo {
+	text-decoration: none;
 }
 </style>

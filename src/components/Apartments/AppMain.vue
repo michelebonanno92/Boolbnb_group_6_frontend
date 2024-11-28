@@ -97,7 +97,7 @@ export default {
 							</ul>
 						</div>
 							<div>
-								<a href="#" class="btn btn-outline-success w-100">Dettagli</a>
+                <router-link :to="{ name: 'apartment-show'}" class="btn btn-outline-success w-100">Dettagli</router-link>
 							</div>
 					</div>
 				
