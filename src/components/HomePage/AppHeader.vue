@@ -35,5 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
-
+header {
+	height: $headerHeight;
+}
 </style>

@@ -98,71 +98,71 @@ export default {
 <template>
   <main>
 
-    <div class="search-container mb-4">
-    <input
-      v-model="searchQuery"
-      @input="fetchSuggestions"
-      placeholder="Cerca un indirizzo..."
-      class="search-bar"
-    />
-    <ul v-if="suggestions.length" class="suggestions-list">
-      <li
-        v-for="(suggestion, index) in suggestions"
-        :key="index"
-        @click="selectSuggestion(suggestion)"
-      >
-        {{ suggestion.address.freeformAddress }}
-      </li>
-    </ul>
+    <div class="container search-container mb-4">
+		<input
+		v-model="searchQuery"
+		@input="fetchSuggestions"
+		placeholder="Cerca un indirizzo..."
+		class="search-bar"
+		/>
+		<ul v-if="suggestions.length" class="suggestions-list text-start">
+			<li
+				v-for="(suggestion, index) in suggestions"
+				:key="index"
+				@click="selectSuggestion(suggestion)"
+			>
+				{{ suggestion.address.freeformAddress }}
+			</li>
+		</ul>
 
-    <div v-if="filteredApartments.length">
-      <h3>Appartamenti trovati entro 10 km:</h3>
-		<div class="container">
-			<div class="row">
-				
-				<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+		<div v-if="filteredApartments.length">
+		<h3>Appartamenti trovati entro 10 km:</h3>
+			<div class="container">
+				<div class="row">
 					
-					<div>
-						<div class="card my-card p-3">
-							<div class="text-center">
-								<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
-							</div>
-							<h4 class="mb-2">
-								{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
-							</h4>
-							<ul class="text-start h-100">
-								<li>
-									Stanze: {{ apartment.rooms }}
-								</li>
-								<li>
-									Letti: {{ apartment.beds }}
-								</li>
-								<li>
-									Bagni: {{ apartment.toilets }}
-								</li>
-							</ul>
-							<div  class="mt-4 h-100">
-								<ul class="service-list">
+					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+						
+						<div>
+							<div class="card my-card p-3">
+								<div class="text-center">
+									<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
+								</div>
+								<h4 class="mb-2">
+									{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
+								</h4>
+								<ul class="text-start h-100">
 									<li>
-										placeholder servizi
+										Stanze: {{ apartment.rooms }}
+									</li>
+									<li>
+										Letti: {{ apartment.beds }}
+									</li>
+									<li>
+										Bagni: {{ apartment.toilets }}
 									</li>
 								</ul>
-							</div>
-							<div>
-								<a href="#" class="btn btn-outline-success w-100">Dettagli</a>
+								<div  class="mt-4 h-100">
+									<ul class="service-list">
+										<li>
+											placeholder servizi
+										</li>
+									</ul>
+								</div>
+								<div>
+									<a href="#" class="btn btn-outline-success w-100">Dettagli</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-      
-    </div>
-	<div v-else-if="!filteredApartments.length && !searchQuery == '' ">
 		
-    	<h3>Nessuno Appartamento trovato</h3>
+		</div>
+		<div v-else-if="!filteredApartments.length && !searchQuery == '' ">
+			
+			<h3>Nessun Appartamento trovato</h3>
 
-	</div>
+		</div>
   </div>
     
   </main>
@@ -189,7 +189,7 @@ export default {
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
-  width: 100%;
+  width: 1200px;
   z-index: 10;
 }
 
@@ -224,5 +224,8 @@ ul {
 
     }
 	
+}
+main {
+  height: calc(100vh - ($headerHeight + $footerHeight));
 }
 </style>
