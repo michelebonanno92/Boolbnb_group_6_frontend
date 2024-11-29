@@ -67,7 +67,7 @@ methods: {
 			// console.log(res.data.apartments);
 	
 			this.apartments = res.data.apartments;
-			console.log(this.apartments);
+			console.log(res);
 			if (this.$route.query.lat && this.$route.query.lon) {
 			this.selectSuggestion(
 			parseFloat(this.$route.query.lat),
@@ -253,10 +253,11 @@ methods: {
 										Bagni: {{ apartment.toilets }}
 									</li>
 								</ul>
-								<div  class="mt-4 h-100">
-									<ul class="service-list">
-										<li>
-											placeholder servizi
+								<div class="text-start">
+									<span class="mb-2">Servizi:</span>
+									<ul>
+										<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+											{{ service.service_name }}
 										</li>
 									</ul>
 								</div>
@@ -300,13 +301,14 @@ methods: {
 							</ul>
 							
 						</div>
-						<div>
-							<ul class="service-list">
-								<li>
-									placeholder servizi
-								</li>
-							</ul>
-						</div>
+							<div class="text-start">
+								<span class="mb-2">Servizi:</span>
+								<ul>
+									<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+										{{ service.service_name }}
+									</li>
+								</ul>
+							</div>
 							<div>
 								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
 							</div>

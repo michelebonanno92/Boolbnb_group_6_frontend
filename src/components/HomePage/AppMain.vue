@@ -19,7 +19,7 @@ export default {
         axios
           .get('http://127.0.0.1:8000/api/apartments')
           .then((res) => {
-            // console.log(res.data.apartments);
+            console.log(res);
 
             this.apartments = res.data.apartments;
             // console.log(this.apartments);
@@ -156,13 +156,14 @@ export default {
 										Bagni: {{ apartment.toilets }}
 									</li>
 								</ul>
-								<div  class="mt-4 h-100">
-									<ul class="service-list">
-										<li>
-											placeholder servizi
-										</li>
-									</ul>
-								</div>
+								<div class="text-start">
+                  <span class="mb-2">Servizi:</span>
+                  <ul>
+                    <li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+                      {{ service.service_name }}
+                    </li>
+                  </ul>
+                </div>
 								<div>
 									<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
 								</div>

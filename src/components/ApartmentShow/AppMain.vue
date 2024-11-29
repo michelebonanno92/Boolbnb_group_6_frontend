@@ -88,14 +88,22 @@ export default {
 						</li>
 					</ul>
 
-					<!-- <div class="text-start">
-						<span class="mb-2">Servizi:</span>
-						<ul>
-								<li foreach (service in apartment.services) class="badge my-services text-bg-primary rounded-pill">
-									{{ service.service_name }}
-								</li>
+					<!-- <div  class="mt-4 h-100">
+						<ul class="service-list">
+							<li v-for="service, index in apartment.services" :key="index">
+								{{ service.service_name }}
+							</li>
 						</ul>
 					</div> -->
+
+					<div class="text-start">
+						<span class="mb-2">Servizi:</span>
+						<ul>
+							<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+								{{ service.service_name }}
+							</li>
+						</ul>
+					</div>
 
           <div class="container my-5">
           <div class="d-flex flex-row">
