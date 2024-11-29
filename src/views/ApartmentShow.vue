@@ -6,7 +6,7 @@
   3) Utilizzo del componente
 */
 // 1) Importazione del componente
-import AppHeaderApartmentShow from '../components/ApartmentShow/AppHeader.vue';
+import AppHeader from '../components/ApartmentShow/AppHeader.vue';
 import AppMain from '../components/ApartmentShow/AppMain.vue';
 import AppFooter from '../components/ApartmentShow/AppFooter.vue';
 
@@ -17,7 +17,7 @@ export default {
   },
   // 2) Dichiarazione del componente
   components: {
-    AppHeaderApartmentShow,
+    AppHeader,
     AppMain,
 	  AppFooter
   },
@@ -28,7 +28,7 @@ export default {
 <template>
   <div>
     <!-- 3) Utilizzo del componente -->
-    <AppHeaderApartmentShow />
+    <AppHeader />
     <AppMain />
 	  <AppFooter />
     
