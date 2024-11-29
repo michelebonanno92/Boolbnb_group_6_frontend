@@ -12,7 +12,6 @@ export default {
   mounted() {
 		this.getApartments();
 
-		
   },
   methods: {
     getApartments() {
@@ -26,7 +25,20 @@ export default {
 			this.apartment = res.data.apartment;
 			// console.log(this.apartments);
     });
-		 },
+
+    
+  },
+  
+  getPush(apartment) {
+    this.$router.push({
+      name: 'message',
+      query: {
+        slug: this.$route.params.slug
+      }
+    })
+    
+     }
+
   }
 }
 </script>
@@ -63,7 +75,7 @@ export default {
         <router-link :to="{ name: 'apartments'}" class="btn btn-secondary btn-lg">Torna indietro</router-link>
       </div>
       <div class="d-flex flex-row-reverse">
-        <button type="button" class="btn btn-primary btn-lg">Invia email</button>
+        <router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-primary btn-lg">Invia Email</router-link>
       </div>
     </div>
     
