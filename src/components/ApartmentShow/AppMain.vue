@@ -51,23 +51,11 @@ export default {
 			<div  class="col-12 col-md-6 offset-md-3">
 				<div class="card p-4">
 					<div v-if="apartment.image">
-						  <img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid rounded">
+							<img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid rounded">
 					</div>
 					<h4 class="mt-4">
 						{{ apartment.title }}
 					</h4>
-					<div class="mb-3">
-            <div v-if="apartment.visible">
-              <p class="badge text-bg-success">
-								Pubblicato
-							</p>
-					  </div>
-            <div class="badge text-bg-warning" v-else>
-              <p>
-								Non pubblicato
-							</p>
-          </div>
-          </div>
 					
 					</div>
 					<p>

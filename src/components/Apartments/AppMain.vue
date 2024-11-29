@@ -174,12 +174,15 @@ methods: {
 		},
 
 		search() {
-			this.$router.push({
-				name: "apartments",
-				query: {  radius: this.radius },
-			});
-			// console.log(this.$router)
-			this.filterApartments();
+			if (this.searchQuery != '' ) {
+				
+				this.$router.push({
+					name: "apartments",
+					query: {  radius: this.radius },
+				});
+				// console.log(this.$router)
+				this.filterApartments();
+			}
 		},
 	}
   }
@@ -261,6 +264,7 @@ methods: {
 										</li>
 									</ul>
 								</div>
+
 								<div>
 									<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
 								</div>
@@ -309,6 +313,7 @@ methods: {
 									</li>
 								</ul>
 							</div>
+								
 							<div>
 								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
 							</div>

@@ -130,54 +130,52 @@ export default {
 			</li>
 		</ul>
 
-		<div v-if="filteredApartments.length">
-		<h3>Appartamenti trovati entro 20 km:</h3>
-			<div class="container">
-				<div class="row">
-					
-					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
-						
-						<div>
-							<div class="card my-card p-3">
-								<div class="text-center">
-									<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
-								</div>
-								<h4 class="mb-2">
-									{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km)
-								</h4>
-								<ul class="text-start h-100">
-									<li>
-										Stanze: {{ apartment.rooms }}
-									</li>
-									<li>
-										Letti: {{ apartment.beds }}
-									</li>
-									<li>
-										Bagni: {{ apartment.toilets }}
-									</li>
-								</ul>
-								<div class="text-start">
-                  <span class="mb-2">Servizi:</span>
-                  <ul>
-                    <li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
-                      {{ service.service_name }}
+    <div >
+      <h3>Appartamenti in evidenza</h3>
+        <div class="container">
+          <div class="row">
+            
+            <div v-for="apartment in apartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+              
+              <div v-if="apartment.sponsorships.length != 0">
+                <div class="card my-card p-3">
+                  <div class="text-center">
+                    <img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
+                  </div>
+                  <h4 class="mb-2">
+                    {{ apartment.title }} 
+                  </h4>
+                  <ul class="text-start h-100">
+                    <li>
+                      Stanze: {{ apartment.rooms }}
+                    </li>
+                    <li>
+                      Letti: {{ apartment.beds }}
+                    </li>
+                    <li>
+                      Bagni: {{ apartment.toilets }}
                     </li>
                   </ul>
-                </div>
-								<div>
-									<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		
-		</div>
-		<div v-else-if="!filteredApartments.length && !searchQuery == '' ">
-			
-			<h3>Nessun Appartamento trovato</h3>
+                  <div class="text-start">
+                    <span class="mb-2">Servizi:</span>
+                    <ul>
+                      <li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+                        {{ service.service_name }}
+                      </li>
+                    </ul>
+                  </div>
 
+                  <div>
+                    <router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
+                  </div>
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+		
 		</div>
   </div>
     
@@ -241,7 +239,5 @@ ul {
     }
 	
 }
-main {
-  height: calc(100vh - ($headerHeight + $footerHeight));
-}
+
 </style>
