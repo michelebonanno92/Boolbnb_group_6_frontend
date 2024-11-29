@@ -73,7 +73,7 @@ export default {
           );
           return { ...apartment, distance }; // Aggiunge la distanza all'appartamento
         })
-        .filter((apartment) => apartment.distance <= 50); // Filtra per raggio
+        .filter((apartment) => apartment.distance <= 20); // Filtra per raggio
         
 
         this.$router.push({
@@ -131,7 +131,7 @@ export default {
 		</ul>
 
 		<div v-if="filteredApartments.length">
-		<h3>Appartamenti trovati entro 10 km:</h3>
+		<h3>Appartamenti trovati entro 20 km:</h3>
 			<div class="container">
 				<div class="row">
 					
