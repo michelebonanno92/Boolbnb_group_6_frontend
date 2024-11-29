@@ -1,9 +1,32 @@
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return { 
-      message: 'Main'
+      message: 'Main',
+	  	apartment: [],
+
     }
+  },
+  mounted() {
+		this.getApartments();
+
+		
+  },
+  methods: {
+    getApartments() {
+		axios
+		  .get('http://127.0.0.1:8000/api/apartments' + '/' + this.$route.params.slug)
+		  .then((res) => {
+			console.log(res.data.apartment);
+			console.log(res.data.apartment.slug);
+
+	
+			this.apartment = res.data.apartment;
+			// console.log(this.apartments);
+    });
+		 },
   }
 }
 </script>
@@ -19,14 +42,19 @@ export default {
           <div class="card mb-3">
             <img src="https://www.bnbinrome.com/images/261428888.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Appartamento</h5>
+              <h5 class="card-title">{{ apartment.slug }}</h5>
               <p class="card-text">Breve descrizione</p>
               <p class="card-text"><small class="text-body-secondary">servizi</small></p>
            </div>
           </div>
         </div>
 
+        
+
       </div>
+
+      
+      
 
       
     </div>
