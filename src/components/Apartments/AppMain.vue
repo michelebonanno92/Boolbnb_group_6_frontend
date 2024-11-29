@@ -11,7 +11,7 @@ export default {
 		suggestions: [],
 		apiKey: 'KtAYjlAUfMLakTMNV7iootfwwERDicp1', // Inserisci la tua API Key qui
 		apartments: [],
-		// radius: this.$route.query.radius || 10, // Raggio predefinito a 10 km
+		radius: this.$route.query.radius || 20, // Raggio predefinito a 10 km
 		filteredApartments: [],
     };
   },
@@ -49,6 +49,7 @@ methods: {
             limit: 5,
             language: "it-IT",
             // countrySet: "IT",
+			radius: this.radius
           },
         })
         .then((response) => {
@@ -77,6 +78,47 @@ methods: {
 		  });
 	},
 
+	// Filtra gli appartamenti in base alla distanza
+    filterApartments() {
+      const url = `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(
+        this.searchQuery
+      )}.json`;
+
+      // Chiamata API TomTom per ottenere le coordinate
+      axios
+        .get(url, {
+          params: {
+            key: this.apiKey,
+            limit: 1,
+			radius: this.radius
+          },
+        })
+        .then((response) => {
+          if (response.data.results.length > 0) {
+            const { lat, lon } = response.data.results[0].position;
+
+            // Filtra appartamenti entro il raggio
+            this.filteredApartments = this.apartments
+              .map((apartment) => {
+                const distance = this.calculateDistance(
+                  lat,
+                  lon,
+                  apartment.latitude,
+                  apartment.longitude
+                );
+                return { ...apartment, distance };
+              })
+              .filter((apartment) => apartment.distance <= this.radius);
+
+			this.filteredApartments = [...this.filteredApartments].sort((a, b) => a.distance - b.distance);
+
+          }
+        })
+        .catch((error) => {
+          console.error("Errore nella chiamata TomTom:", error);
+        });
+    },
+
 		selectSuggestion(latitude, longitude ) {
 
 		// Filtra gli appartamenti entro 10 km
@@ -90,9 +132,9 @@ methods: {
 			);
 			return { ...apartment, distance }; // Aggiunge la distanza all'appartamento
 			})
-			.filter((apartment) => apartment.distance <= 50); // Filtra per raggio
+			.filter((apartment) => apartment.distance <= this.radius); // Filtra per raggio
 
-			this.filteredApartments = [...this.filteredApartments];
+			this.filteredApartments = [...this.filteredApartments].sort((a, b) => a.distance - b.distance);
 
 			// Pulisce la lista delle suggestions
 			this.suggestions = [];
@@ -130,6 +172,15 @@ methods: {
 			this.suggestions = []; // Nasconde la lista delle suggestions
 		}
 		},
+
+		search() {
+			this.$router.push({
+				name: "apartments",
+				query: {  radius: this.radius },
+			});
+			// console.log(this.$router)
+			this.filterApartments();
+		},
 	}
   }
 </script>
@@ -146,21 +197,13 @@ methods: {
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Filtri
-						</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Action</a></li>
-								<li><a class="dropdown-item" href="#">Another action</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#">Something else here</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
+				<input
+					type="number"
+					v-model="radius"
+					placeholder="Raggio (km)"
+					
+				/>
+				<button @click="search">Cerca</button>
 			</div>
 		</nav>
 		<div class="" >
@@ -185,7 +228,7 @@ methods: {
 	  <!-- <div> {{ apartments }} </div> -->
 
 		<div v-if="filteredApartments.length">
-		<h3>Appartamenti trovati entro 10 km:</h3>
+		<h3>Appartamenti trovati entro {{ radius }} km:</h3>
 			<div class="container">
 				<div class="row">
 					
