@@ -15,8 +15,8 @@ export default {
 		
   },
   computed: {
- selectedAppartamentoSlug() {
-   return this.$route.query.slug;
+    selectedAppartamentoSlug() {
+    return this.$route.query.slug;
  }
 },
   methods: {
@@ -36,8 +36,6 @@ export default {
 }
 
 
-    
-
 </script>
 
 <template>
@@ -47,19 +45,29 @@ export default {
       <div class="row">
 
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Tuo indirizzo email:</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@esempio.com">
+          <label for="exampleFormControlInput1" class="form-label">Il tuo Nome: <span>*</span> </label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" required minlength="5" maxlength="20" placeholder="nome">
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Messaggio:</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <label for="exampleFormControlInput1" class="form-label">Il tuo indirizzo email: <span>*</span> </label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" required minlength="5" maxlength="20" placeholder="nome@esempio.com">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Messaggio: <span>*</span> </label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required minlength="3" maxlength="2000" placeholder="inserisci il tuo messaggio"></textarea>
+      </div>
+      <div>
+        <p>
+          <small>
+            <span>*</span> i campi contrassegnati con l'asterisco sono obbligatori
+          </small>
+        </p>
       </div>
 
       </div>
     </div>
 
     <div class="container my-5">
-      <!-- deve tornare indietro nell'appartamento giusto -->
       <div class="d-flex flex-row">
         <!-- <router-link :to="{ name: 'apartment-show', params: { slug: selectedAppartamentoSlug } }" class="btn btn-secondary btn-lg">Torna indietro</router-link>  -->
          <router-link :to="{ name: 'apartment-show', params: { slug: selectedAppartamentoSlug } }"  class="btn btn-secondary btn-lg">Torna indietro</router-link>
@@ -77,61 +85,12 @@ export default {
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
 
-// .search-bar {
-//   width: 100%;
-//   padding: 10px;
-//   font-size: 16px;
-//   border: 1px solid #ccc;
-//   border-radius: 4px;
-// }
-
-// .suggestions-list {
-//   list-style: none;
-//   padding: 0;
-//   margin: 0;
-//   background: white;
-//   border: 1px solid #ccc;
-//   max-height: 200px;
-//   overflow-y: auto;
-//   position: absolute;
-//   width: 1200px;
-//   z-index: 10;
-// }
-
-// .suggestions-list li {
-//   padding: 8px;
-//   cursor: pointer;
-// }
-
-// .suggestions-list li:hover {
-//   background: #f0f0f0;
-// }
-
-// ul {
-//     list-style: none;
-//     padding: 0;
-//     height: 100%;
-
-//     .badge {
-//         padding: 5px 10px;
-//         margin-bottom: 4px;
-//     }
-    
-// }
-
-// .my-card {
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%;
-//     box-shadow: 5px 5px 10px 3px lightgray;
-//     &:hover{
-//         box-shadow: 5px 5px 10px 12px lightgray;
-
-//     }
-	
-// }
-
 main {
   height: calc(100vh - ($headerHeight + $footerHeight));
 }
+
+span {
+  color: red;
+}
+
 </style>
