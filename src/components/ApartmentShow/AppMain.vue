@@ -46,39 +46,71 @@ export default {
 <template>
   <main>
 
-    <div class="container my-5" style="width: 1000px;">
-
-      <div class="row">
-        
-        <div class="container text-center">
-          <div class="card mb-3">
-            <img src="https://www.bnbinrome.com/images/261428888.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ apartment.slug }}</h5>
-              <p class="card-text">Breve descrizione</p>
-              <p class="card-text"><small class="text-body-secondary">servizi</small></p>
-           </div>
+    <div class="container  text-center"   style="width: 1000px;">
+		<div class="row ">
+			<div  class="col-12 col-md-6 offset-md-3">
+				<div class="card p-4">
+					<div v-if="apartment.image">
+						  <img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid rounded">
+					</div>
+					<h4 class="mt-4">
+						{{ apartment.title }}
+					</h4>
+					<div class="mb-3">
+            <div v-if="apartment.visible">
+              <p class="badge text-bg-success">
+								Pubblicato
+							</p>
+					  </div>
+            <div class="badge text-bg-warning" v-else>
+              <p>
+								Non pubblicato
+							</p>
           </div>
-        </div>
+          </div>
+					
+					</div>
+					<p>
+						{{ apartment.address }}
+					</p>
+					<p>
+						{{ apartment.description }}
+					</p>
+					<ul class="text-start">
+						<li>
+							Stanze: {{ apartment.rooms }}
+						</li>
+						<li>
+							Letti: {{ apartment.beds }}
+						</li>
+						<li>
+							Bagni: {{ apartment.toilets }}
+						</li>
+					</ul>
 
-        
+					<!-- <div class="text-start">
+						<span class="mb-2">Servizi:</span>
+						<ul>
+								<li foreach (service in apartment.services) class="badge my-services text-bg-primary rounded-pill">
+									{{ service.service_name }}
+								</li>
+						</ul>
+					</div> -->
 
-      </div>
-
-      
-      
-
-      
+          <div class="container my-5">
+          <div class="d-flex flex-row">
+            <router-link :to="{ name: 'apartments'}" class="btn btn-secondary btn-lg">Torna indietro</router-link>
+          </div>
+          <div class="d-flex flex-row-reverse">
+            <router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-primary btn-lg">Invia Email</router-link>
+          </div>
     </div>
-    <div class="container my-5">
-      <div class="d-flex flex-row">
-        <router-link :to="{ name: 'apartments'}" class="btn btn-secondary btn-lg">Torna indietro</router-link>
-      </div>
-      <div class="d-flex flex-row-reverse">
-        <router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-primary btn-lg">Invia Email</router-link>
-      </div>
-    </div>
-    
+
+					
+				</div>
+			</div>
+		</div>
+	
   </main>
 
 </template>
