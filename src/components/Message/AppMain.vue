@@ -7,6 +7,9 @@ export default {
       message: 'Main',
 	  	slug: this.$route.query.slug,
 
+      userName: '',
+      userEmail: '',
+      userMessage: ''
     }
   },
   mounted() {
@@ -16,7 +19,7 @@ export default {
   },
   computed: {
     selectedAppartamentoSlug() {
-    return this.$route.query.slug;
+      return this.$route.query.slug;
  }
 },
   methods: {
@@ -32,6 +35,25 @@ export default {
 			// console.log(this.apartments);
     });
 		},
+
+    sendContact() {
+      console.log('si'),
+      axios
+        .post('http://localhost:8000/api/new-message', {
+          name: this.userName,
+          email: this.userEmail,
+          message: this.userMessage
+        })
+        .then(res => {
+          if (res.data.success) {
+            alert('Email inviata con successo!');
+            
+            this.userName = '';
+            this.userEmail = '';
+            this.userMessage = '';
+          }
+        });
+    }
   }
 }
 
@@ -44,18 +66,27 @@ export default {
     <div class="container">
       <div class="row">
 
+        <form @submit.prevent="sendContact()">
+
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Il tuo Nome: <span>*</span> </label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" required minlength="5" maxlength="20" placeholder="nome">
+          <label for="name" class="form-label">Il tuo Nome: <span>*</span> </label>
+          <input type="text" class="form-control" id="name" name="name" v-model="userName" required minlength="5" maxlength="20" placeholder="nome">
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Il tuo indirizzo email: <span>*</span> </label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" required minlength="5" maxlength="20" placeholder="nome@esempio.com">
+          <label for="email" class="form-label">Il tuo indirizzo email: <span>*</span> </label>
+          <input type="email" class="form-control" id="email" name="email" v-model="userEmail" required minlength="5" maxlength="20" placeholder="nome@esempio.com">
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Messaggio: <span>*</span> </label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required minlength="3" maxlength="2000" placeholder="inserisci il tuo messaggio"></textarea>
-      </div>
+          <label for="message" class="form-label">Messaggio: <span>*</span> </label>
+          <textarea class="form-control" id="message" name="message" rows="3" v-model="userMessage" required minlength="3" maxlength="2000" placeholder="inserisci il tuo messaggio"></textarea>
+        </div>
+
+        <div class="d-flex flex-row-reverse">
+          <button type="submit" class="btn btn-primary btn-lg">Invia email</button>
+        </div>
+
+        </form>
+      
       <div>
         <p>
           <small>
@@ -73,9 +104,9 @@ export default {
          <router-link :to="{ name: 'apartment-show', params: { slug: selectedAppartamentoSlug } }"  class="btn btn-secondary btn-lg">Torna indietro</router-link>
       </div>
       
-      <div class="d-flex flex-row-reverse">
+      <!-- <div class="d-flex flex-row-reverse">
         <button type="button" class="btn btn-primary btn-lg">Invia email</button>
-      </div>
+      </div> -->
     </div>
 
   </main>
