@@ -135,9 +135,9 @@ export default {
         <div class="container">
           <div class="row">
             
-            <div v-for="apartment in apartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+            <div  v-for="apartment in apartments.filter(a => a.sponsorships && a.sponsorships.length > 0)" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
               
-              <div v-if="apartment.sponsorships.length != 0">
+              <div>
                 <div class="card my-card p-3">
                   <div class="text-center">
                     <img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
