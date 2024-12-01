@@ -5,11 +5,11 @@ export default {
   data() {
     return { 
       message: 'Main',
-	  	slug: this.$route.query.slug,
-
+	  slug: this.$route.query.slug,
       userName: '',
       userEmail: '',
-      userMessage: ''
+      userMessage: '',
+	  apartmentId : 0
     }
   },
   mounted() {
@@ -27,24 +27,32 @@ export default {
 		axios
 		  .get('http://127.0.0.1:8000/api/apartments' + '/' + this.slug)
 		  .then((res) => {
-			console.log(res.data.apartment);
+			console.log(res.data.apartment.id);
 			console.log(res.data.apartment.slug);
 
-	
+			this.apartmentId  = res.data.apartment.id;
 			this.apartment = res.data.apartment;
 			// console.log(this.apartments);
     });
 		},
 
-		sendContact() {
+		sendMessage() {
+
+			console.log({
+				name: this.userName,
+				email: this.userEmail,
+				message: this.userMessage,
+				apartment_id: this.apartmentId,
+			});
 		axios
-			.post('http://localhost:8000/api/new-message', {
+			.post('http://127.0.0.1:8000/api/new-message', {
 			name: this.userName,
-			email: this.userEmail,
+			email: this.userEmail.trim(),
 			message: this.userMessage,
-			// apartment_slug: this.slug // Passa lo slug dell'appartamento
+			apartment_id: this.apartmentId  
 			})
 			.then(res => {
+				console.log(res.data);
 			if (res.data.success) {
 				alert('Messaggio inviato con successo!');
 				
@@ -71,7 +79,7 @@ export default {
     <div class="container">
       <div class="row">
 
-		<form @submit.prevent="sendContact">
+		<form @submit.prevent="sendMessage">
 		<div class="mb-3">
 			<label for="name" class="form-label">Il tuo Nome:</label>
 			<input
