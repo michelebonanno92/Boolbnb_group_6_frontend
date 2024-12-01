@@ -5,8 +5,11 @@ export default {
   data() {
     return { 
       message: 'Main',
-	  	slug: this.$route.query.slug,
-
+	  slug: this.$route.query.slug,
+      userName: '',
+      userEmail: '',
+      userMessage: '',
+	  apartmentId : 0
     }
   },
   mounted() {
@@ -15,8 +18,8 @@ export default {
 		
   },
   computed: {
- selectedAppartamentoSlug() {
-   return this.$route.query.slug;
+    selectedAppartamentoSlug() {
+      return this.$route.query.slug;
  }
 },
   methods: {
@@ -24,19 +27,49 @@ export default {
 		axios
 		  .get('http://127.0.0.1:8000/api/apartments' + '/' + this.slug)
 		  .then((res) => {
-			console.log(res.data.apartment);
+			console.log(res.data.apartment.id);
 			console.log(res.data.apartment.slug);
 
-	
+			this.apartmentId  = res.data.apartment.id;
 			this.apartment = res.data.apartment;
 			// console.log(this.apartments);
     });
 		},
+
+		sendMessage() {
+
+			console.log({
+				name: this.userName,
+				email: this.userEmail,
+				message: this.userMessage,
+				apartment_id: this.apartmentId,
+			});
+		axios
+			.post('http://127.0.0.1:8000/api/new-message', {
+			name: this.userName,
+			email: this.userEmail.trim(),
+			message: this.userMessage,
+			apartment_id: this.apartmentId  
+			})
+			.then(res => {
+				console.log(res.data);
+			if (res.data.success) {
+				alert('Messaggio inviato con successo!');
+				
+				// Reset dei campi del form
+				this.userName = '';
+				this.userEmail = '';
+				this.userMessage = '';
+			}
+			})
+			.catch(err => {
+			console.error(err);
+			alert('Errore durante l\'invio del messaggio.');
+			});
+	}
   }
 }
 
-
-    
 
 </script>
 
@@ -46,28 +79,66 @@ export default {
     <div class="container">
       <div class="row">
 
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Tuo indirizzo email:</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@esempio.com">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Messaggio:</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+		<form @submit.prevent="sendMessage">
+		<div class="mb-3">
+			<label for="name" class="form-label">Il tuo Nome:</label>
+			<input
+				type="text"
+				class="form-control"
+				id="name"
+				v-model="userName"
+				required
+				minlength="3"
+				maxlength="64"
+				placeholder="Inserisci il tuo nome"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="email" class="form-label">Il tuo Email:</label>
+			<input
+				type="email"
+				class="form-control"
+				id="email"
+				v-model="userEmail"
+				required
+				placeholder="nome@esempio.com"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="message" class="form-label">Messaggio:</label>
+			<textarea
+				class="form-control"
+				id="message"
+				v-model="userMessage"
+				required
+				minlength="5"
+				maxlength="2000"
+				placeholder="Scrivi il tuo messaggio qui"
+			></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary">Invia Messaggio</button>
+	</form>
+      
+      <div>
+        <p>
+          <small>
+            <span>*</span> i campi contrassegnati con l'asterisco sono obbligatori
+          </small>
+        </p>
       </div>
 
       </div>
     </div>
 
     <div class="container my-5">
-      <!-- deve tornare indietro nell'appartamento giusto -->
       <div class="d-flex flex-row">
         <!-- <router-link :to="{ name: 'apartment-show', params: { slug: selectedAppartamentoSlug } }" class="btn btn-secondary btn-lg">Torna indietro</router-link>  -->
          <router-link :to="{ name: 'apartment-show', params: { slug: selectedAppartamentoSlug } }"  class="btn btn-secondary btn-lg">Torna indietro</router-link>
       </div>
       
-      <div class="d-flex flex-row-reverse">
+      <!-- <div class="d-flex flex-row-reverse">
         <button type="button" class="btn btn-primary btn-lg">Invia email</button>
-      </div>
+      </div> -->
     </div>
 
   </main>
@@ -77,61 +148,12 @@ export default {
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
 
-// .search-bar {
-//   width: 100%;
-//   padding: 10px;
-//   font-size: 16px;
-//   border: 1px solid #ccc;
-//   border-radius: 4px;
-// }
-
-// .suggestions-list {
-//   list-style: none;
-//   padding: 0;
-//   margin: 0;
-//   background: white;
-//   border: 1px solid #ccc;
-//   max-height: 200px;
-//   overflow-y: auto;
-//   position: absolute;
-//   width: 1200px;
-//   z-index: 10;
-// }
-
-// .suggestions-list li {
-//   padding: 8px;
-//   cursor: pointer;
-// }
-
-// .suggestions-list li:hover {
-//   background: #f0f0f0;
-// }
-
-// ul {
-//     list-style: none;
-//     padding: 0;
-//     height: 100%;
-
-//     .badge {
-//         padding: 5px 10px;
-//         margin-bottom: 4px;
-//     }
-    
-// }
-
-// .my-card {
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%;
-//     box-shadow: 5px 5px 10px 3px lightgray;
-//     &:hover{
-//         box-shadow: 5px 5px 10px 12px lightgray;
-
-//     }
-	
-// }
-
 main {
   height: calc(100vh - ($headerHeight + $footerHeight));
 }
+
+span {
+  color: red;
+}
+
 </style>
