@@ -195,21 +195,24 @@ methods: {
   	<div class="container">
 
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Ricerca appartamenti</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-				</button>
-				<input
-					type="number"
-					v-model="radius"
-					placeholder="Raggio (km)"
-					
-				/>
-				<button @click="search">Cerca</button>
+			<div class="container d-flex">
+				<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
+				<div class="w-50">
+					<label for="input-address">Ricerca per raggio</label>
+					<input
+						class="form-control"
+						id="input-address"
+						type="number"
+						v-model="radius"
+						placeholder="Raggio (km)"
+						
+					/>
+
+				</div>
+				<button @click="search" class="btn btn-primary">Cerca</button>
 			</div>
 		</nav>
-		<div class="" >
+		<div class="my-5" >
 		<input
 		v-model="searchQuery"
 		@input="fetchSuggestions"
@@ -231,13 +234,11 @@ methods: {
 	  <!-- <div> {{ apartments }} </div> -->
 
 		<div v-if="filteredApartments.length">
-		<h3>Appartamenti trovati entro {{ radius }} km:</h3>
+		<h3 class="mb-4">Appartamenti trovati entro {{ radius }} km:</h3>
 			<div class="container">
 				<div class="row">
 					
 					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
-						
-						<div>
 							<div class="card my-card p-3">
 								<div class="text-center">
 									<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
@@ -257,9 +258,9 @@ methods: {
 									</li>
 								</ul>
 								<div class="text-start">
-									<span class="mb-2">Servizi:</span>
-									<ul>
-										<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+									<span class="">Servizi:</span>
+									<ul class="mt-2">
+										<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2 ">
 											{{ service.service_name }}
 										</li>
 									</ul>
@@ -269,7 +270,6 @@ methods: {
 									<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
 								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -306,9 +306,9 @@ methods: {
 							
 						</div>
 							<div class="text-start">
-								<span class="mb-2">Servizi:</span>
-								<ul>
-									<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+								<span class="">Servizi:</span>
+								<ul class="mt-2">
+									<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2">
 										{{ service.service_name }}
 									</li>
 								</ul>
@@ -346,7 +346,7 @@ methods: {
 main {
   text-align: center;
   padding: 20px 0;
-  height: calc(300vh - ($headerHeight + $footerHeight));
+  height: calc(100% - 180px);
 }
 .my-card {
     display: flex;

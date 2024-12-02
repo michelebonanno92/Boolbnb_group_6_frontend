@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  	<header class="bg-body-tertiary py-2 mb-4">
+  	<header class="bg-body-tertiary py-2 mb-2">
 		<div class="container">
 			<div class="row">
 				<div class="col d-flex justify-content-start">
