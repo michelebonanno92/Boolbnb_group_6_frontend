@@ -81,7 +81,7 @@ export default {
 
 		<form @submit.prevent="sendMessage">
 		<div class="mb-3">
-			<label for="name" class="form-label">Il tuo Nome:</label>
+			<label for="name" class="form-label">Il tuo Nome<span class="text-danger">*</span></label>
 			<input
 				type="text"
 				class="form-control"
@@ -94,7 +94,7 @@ export default {
 			/>
 		</div>
 		<div class="mb-3">
-			<label for="email" class="form-label">Il tuo Email:</label>
+			<label for="email" class="form-label">Il tuo Email<span class="text-danger">*</span></label>
 			<input
 				type="email"
 				class="form-control"
@@ -105,7 +105,7 @@ export default {
 			/>
 		</div>
 		<div class="mb-3">
-			<label for="message" class="form-label">Messaggio:</label>
+			<label for="message" class="form-label">Messaggio<span class="text-danger">*</span></label>
 			<textarea
 				class="form-control"
 				id="message"
@@ -116,16 +116,18 @@ export default {
 				placeholder="Scrivi il tuo messaggio qui"
 			></textarea>
 		</div>
+		<div>
+			<p>
+			<small>
+				<span>*</span> i campi contrassegnati con l'asterisco sono obbligatori
+			</small>
+			</p>
+		</div>
+
 		<button type="submit" class="btn btn-primary">Invia Messaggio</button>
 	</form>
       
-      <div>
-        <p>
-          <small>
-            <span>*</span> i campi contrassegnati con l'asterisco sono obbligatori
-          </small>
-        </p>
-      </div>
+      
 
       </div>
     </div>
