@@ -46,7 +46,7 @@ export default {
 <template>
   <main>
 
-    <div class="container  text-center"   style="width: 1000px;">
+	<div class="container  text-center"   style="width: 1000px;">
 		<div class="row ">
 			<div  class="col-12 col-md-6 offset-md-3">
 				<div class="card p-4">
@@ -57,7 +57,7 @@ export default {
 						{{ apartment.title }}
 					</h4>
 					
-					</div>
+					
 					<p>
 						{{ apartment.address }}
 					</p>
@@ -85,29 +85,32 @@ export default {
 					</div> -->
 
 					<div class="text-start">
-						<span class="mb-2">Servizi:</span>
+						<span class="mb-2 ">Servizi:</span>
 						<ul>
-							<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+							<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2">
 								{{ service.service_name }}
 							</li>
 						</ul>
 					</div>
+					<div class="container d-flex justify-content-around mb-4">
+						<div>
+							<router-link :to="{ name: 'apartments'}" class="btn btn-secondary btn-lg">Torna indietro</router-link>
+						</div>
+						<div>
+							<router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-primary btn-lg">Invia messaggio</router-link>
+						</div>
+    				</div>
 
-          <div class="container my-5">
-          <div class="d-flex flex-row">
-            <router-link :to="{ name: 'apartments'}" class="btn btn-secondary btn-lg">Torna indietro</router-link>
-          </div>
-          <div class="d-flex flex-row-reverse">
-            <router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-primary btn-lg">Invia Email</router-link>
-          </div>
-    </div>
-
-					
 				</div>
-			</div>
+
+			</div>	
 		</div>
-	
+	</div>
+
   </main>
+
+
+ 	
 
 </template>
 
