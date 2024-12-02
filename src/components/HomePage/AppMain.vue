@@ -113,12 +113,12 @@ export default {
 <template>
   <main>
 
-    <div class="container search-container mb-4">
+    <div class="container search-container">
 		<input
 		v-model="searchQuery"
 		@input="fetchSuggestions"
 		placeholder="Cerca un indirizzo..."
-		class="search-bar"
+		class="search-bar mb-4"
 		/>
 		<ul v-if="suggestions.length" class="suggestions-list text-start">
 			<li 
@@ -131,18 +131,16 @@ export default {
 		</ul>
 
     <div >
-      <h3>Appartamenti in evidenza</h3>
+      <h3 class="mb-4">Appartamenti in evidenza</h3>
         <div class="container">
           <div class="row">
             
             <div  v-for="apartment in apartments.filter(a => a.sponsorships && a.sponsorships.length > 0)" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
-              
-              <div>
                 <div class="card my-card p-3">
                   <div class="text-center">
                     <img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
                   </div>
-                  <h4 class="mb-2">
+                  <h4 class="mb-2 text-center">
                     {{ apartment.title }} 
                   </h4>
                   <ul class="text-start h-100">
@@ -170,9 +168,6 @@ export default {
                   </div>
                 </div>
               </div>
-
-              
-            </div>
           </div>
         </div>
 		
@@ -185,6 +180,34 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
+
+main {
+  height: calc(100% - 180px);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  height: 100%;
+  
+  .badge {
+    padding: 5px 10px;
+    margin-bottom: 4px;
+  }
+  
+}
+
+.my-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 5px 5px 10px 3px lightgray;
+  &:hover{
+    box-shadow: 5px 5px 10px 12px lightgray;
+    
+  }
+	
+}
 
 .search-bar {
   width: 100%;
@@ -214,30 +237,6 @@ export default {
 
 .suggestions-list li:hover {
   background: #f0f0f0;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    height: 100%;
-
-    .badge {
-        padding: 5px 10px;
-        margin-bottom: 4px;
-    }
-    
-}
-
-.my-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    box-shadow: 5px 5px 10px 3px lightgray;
-    &:hover{
-        box-shadow: 5px 5px 10px 12px lightgray;
-
-    }
-	
 }
 
 </style>
