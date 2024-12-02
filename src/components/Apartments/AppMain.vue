@@ -195,8 +195,8 @@ methods: {
   	<div class="container">
 
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
-			<div class="container my-3">
-				<a class="navbar-brand" href="#">Ricerca appartamenti</a>
+			<div class="container d-flex">
+				<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
 				<div class="w-50">
 					<label for="input-address">Ricerca per raggio</label>
 					<input
