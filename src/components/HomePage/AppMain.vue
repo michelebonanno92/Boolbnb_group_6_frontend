@@ -155,9 +155,9 @@ export default {
                     </li>
                   </ul>
                   <div class="text-start">
-                    <span class="mb-2">Servizi:</span>
-                    <ul>
-                      <li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill">
+                    <span class="mb-4">Servizi:</span>
+                    <ul class="mt-2">
+                      <li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2">
                         {{ service.service_name }}
                       </li>
                     </ul>

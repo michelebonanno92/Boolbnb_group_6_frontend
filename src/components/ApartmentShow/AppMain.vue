@@ -46,7 +46,7 @@ export default {
 <template>
   <main>
 
-	<div class="container  text-center"   style="width: 1000px;">
+	<div class="container  text-center mb-5"   style="width: 1000px;">
 		<div class="row ">
 			<div  class="col-12 col-md-6 offset-md-3">
 				<div class="card p-4">
@@ -117,5 +117,8 @@ export default {
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
 
+main {
+  height: calc(100% - 180px);
+}
 
 </style>
