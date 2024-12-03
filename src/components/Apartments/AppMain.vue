@@ -13,15 +13,21 @@ export default {
 		apartments: [],
 		radius: this.$route.query.radius || 20, // Raggio predefinito a 10 km
 		filteredApartments: [],
+	// 	services: [
+    //     { service_name: "Service 1", checked: false },
+    //     { service_name: "Service 2", checked: false },
+    //     { service_name: "Service 3", checked: false }
+    //   ],
+		myServices: []
     };
   },
   mounted() {
+	  this.getServices();
 		this.getApartments();
 
 		// Aggiunge l'ascoltatore per clic fuori dalla barra di ricerca o dalle suggestions
 		document.addEventListener('click', this.handleClickOutside);
 
-		
     },
 
 beforeUnmount() {
@@ -30,6 +36,22 @@ beforeUnmount() {
 },
 methods: {
       
+	getServices() {
+		axios
+		  .get('http://127.0.0.1:8000/api/services')
+		  .then((res) => {
+			// console.log(res.data.services);
+	
+			this.myServices = res.data.services;
+			console.log(res);
+
+			this.myServices.forEach(servicex => {
+				servicex.checked = false;
+			}); 
+			console.log(this.services);
+
+		  });
+		},
 
 	  // suggerimento ricerca
       fetchSuggestions() {
@@ -184,6 +206,13 @@ methods: {
 				this.filterApartments();
 			}
 		},
+
+		clickFilterService(index) {
+			this.myServices[index].checked = !this.myServices[index].checked;
+			// this.services[index].checked =
+       		// 	this.services[index].checked === "checked" ? "" : "checked";
+			console.log(this.myServices[index])
+		},
 	}
   }
 </script>
@@ -193,42 +222,77 @@ methods: {
 	<main>
 
   	<div class="container">
+		<div class="row">
 
-		<nav class="navbar navbar-expand-lg bg-body-tertiary">
-			<div class="container d-flex">
-				<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
-				<div class="w-50">
-					<label for="input-address">Ricerca per raggio</label>
-					<input
-						class="form-control"
-						id="input-address"
-						type="number"
-						v-model="radius"
-						placeholder="Raggio (km)"
-						
-					/>
-
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
+				<div class="container">
+	
+					<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
+	
+					<div class="btn-group">
+						<button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							Action
+						</button>
+						<ul class="dropdown-menu">
+							<li v-for="(servicex, index) in this.myServices" :key="index" @click.stop="clickFilterService(index)" class="">
+								<input type="checkbox"  :name="servicex.service_name" :id="servicex.service_name" v-model="servicex.checked"  > {{servicex.service_name}}
+							</li>
+						</ul>
+					</div>
+	
+					<div class="w-50">
+						<label for="input-address">Ricerca per raggio</label>
+						<input
+							class="form-control"
+							id="input-address"
+							type="number"
+							v-model="radius"
+							placeholder="Raggio (km)"
+							
+						/>
+	
+					</div>
+					<button @click="search" class="btn btn-primary">Cerca</button>
 				</div>
-				<button @click="search" class="btn btn-primary">Cerca</button>
-			</div>
-		</nav>
-		<div class="my-5" >
-		<input
-		v-model="searchQuery"
-		@input="fetchSuggestions"
-		placeholder="Cerca un indirizzo..."
-		class="search-bar"
-		/>
-		<ul v-if="suggestions.length" class="suggestions-list text-start">
-			<li
-				v-for="(suggestion, index) in suggestions"
-				:key="index"
-				@click="suggestion.position ? selectSuggestion(suggestion.position.lat, suggestion.position.lon) : null"
-			>
-				{{ suggestion.address.freeformAddress }}
-			</li>
-		</ul>
+			</nav>
 		</div>
+
+		<div class="row">
+			<div class="col-12 col-sm-6 col-md-4">
+				<label for="rooms">Numero stanze</label>
+				<input type="number" class="form-control" name="" id="rooms">
+			</div>
+			<div class="col-12 col-sm-6 col-md-4">
+				<label for="beds">Numero letti</label>
+				<input type="number" class="form-control" name="" id="beds">
+			</div>
+			<div class="col-12 col-sm-6 col-md-4">
+				<label for="toilets" >Numero bagni</label>
+				<input type="number" class="form-control" name="" id="toilets">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="my-5" >
+			<input
+			v-model="searchQuery"
+			@input="fetchSuggestions"
+			placeholder="Cerca un indirizzo..."
+			class="search-bar"
+			/>
+			<ul v-if="suggestions.length" class="suggestions-list text-start">
+				<li
+					v-for="(suggestion, index) in suggestions"
+					:key="index"
+					@click="suggestion.position ? selectSuggestion(suggestion.position.lat, suggestion.position.lon) : null"
+				>
+					{{ suggestion.address.freeformAddress }}
+				</li>
+			</ul>
+			</div>
+
+		</div>
+		
 
   	</div>
 	  <!-- <div> {{ apartments }} </div> -->
@@ -237,39 +301,38 @@ methods: {
 		<h3 class="mb-4">Appartamenti trovati entro {{ radius }} km:</h3>
 			<div class="container">
 				<div class="row">
-					
 					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
-							<div class="card my-card p-3">
-								<div class="text-center">
-									<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
-								</div>
-								<h4 class="mb-2">
-									{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km) 
-								</h4>
-								<ul class="text-start h-100">
-									<li>
-										Stanze: {{ apartment.rooms }}
-									</li>
-									<li>
-										Letti: {{ apartment.beds }}
-									</li>
-									<li>
-										Bagni: {{ apartment.toilets }}
+						<div class="card my-card p-3">
+							<div class="text-center">
+								<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
+							</div>
+							<h4 class="mb-2">
+								{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km) 
+							</h4>
+							<ul class="text-start h-100">
+								<li>
+									Stanze: {{ apartment.rooms }}
+								</li>
+								<li>
+									Letti: {{ apartment.beds }}
+								</li>
+								<li>
+									Bagni: {{ apartment.toilets }}
+								</li>
+							</ul>
+							<div class="text-start">
+								<span class="">Servizi:</span>
+								<ul class="mt-2">
+									<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2 ">
+										{{ service.service_name }}
 									</li>
 								</ul>
-								<div class="text-start">
-									<span class="">Servizi:</span>
-									<ul class="mt-2">
-										<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2 ">
-											{{ service.service_name }}
-										</li>
-									</ul>
-								</div>
-
-								<div>
-									<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
-								</div>
 							</div>
+
+							<div>
+								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -307,7 +370,7 @@ methods: {
 						</div>
 							<div class="text-start">
 								<span class="">Servizi:</span>
-								<ul class="mt-2">
+								<ul class="mt-2 ">
 									<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2">
 										{{ service.service_name }}
 									</li>
@@ -358,18 +421,19 @@ main {
 
     }
 	
+	ul {
+		list-style: none;
+		padding: 0;
+		height: 100%;
+	
+		.badge {
+			padding: 5px 10px;
+			margin-bottom: 4px;
+		}
+		
+	}
 }
-ul {
-    list-style: none;
-    padding: 0;
-    height: 100%;
 
-    .badge {
-        padding: 5px 10px;
-        margin-bottom: 4px;
-    }
-    
-}
 
 h1 {
   color: red;
@@ -404,4 +468,8 @@ h1 {
 .suggestions-list li:hover {
   background: #f0f0f0;
 }
+
+// .completed {
+//   text-decoration: line-through;
+// }
 </style>
