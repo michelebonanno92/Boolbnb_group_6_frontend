@@ -135,12 +135,27 @@ methods: {
                 return { ...apartment, distance };
               })
 			  .filter((apartment) => {
-				return (
-					apartment.distance <= this.radius &&
-					(this.rooms === null || apartment.rooms >= this.rooms) &&
-					(this.beds === null || apartment.beds >= this.beds) &&
-					(this.toilets === null || apartment.toilets >= this.toilets)
+
+				const matchesBasicCriteria =
+				apartment.distance <= this.radius &&
+				(this.rooms === null || apartment.rooms >= this.rooms) &&
+				(this.beds === null || apartment.beds >= this.beds) &&
+				(this.toilets === null || apartment.toilets >= this.toilets);
+
+				// Verifica se tutti i servizi selezionati sono inclusi nell'appartamento
+				const matchesServices =
+				this.myFilterServices.length === 0 || // Nessun filtro selezionato
+				this.myFilterServices.every((serviceId) =>
+					apartment.services.some((service) => service.id === serviceId)
 				);
+
+				return matchesBasicCriteria && matchesServices;
+				// return (
+				// 	apartment.distance <= this.radius &&
+				// 	(this.rooms === null || apartment.rooms >= this.rooms) &&
+				// 	(this.beds === null || apartment.beds >= this.beds) &&
+				// 	(this.toilets === null || apartment.toilets >= this.toilets)
+				// );
 			});
             //   .filter((apartment) => apartment.distance <= this.radius);
 
