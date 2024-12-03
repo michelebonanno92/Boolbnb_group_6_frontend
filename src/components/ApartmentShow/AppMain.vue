@@ -24,10 +24,7 @@ export default {
 	
 			this.apartment = res.data.apartment;
 			// console.log(this.apartments);
-    });
-
-    
-  },
+    })},
   
   getPush(apartment) {
     this.$router.push({
@@ -35,9 +32,7 @@ export default {
       query: {
         slug: this.$route.params.slug
       }
-    })
-    
-     }
+    })}
 
   }
 }
