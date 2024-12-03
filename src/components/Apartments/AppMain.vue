@@ -18,7 +18,11 @@ export default {
     //     { service_name: "Service 2", checked: false },
     //     { service_name: "Service 3", checked: false }
     //   ],
-		myServices: []
+		myServices: [],
+		myFilterServices: [],
+		rooms: this.$route.query.rooms || null,
+		beds: this.$route.query.beds || null,
+		toilets: this.$route.query.toilets || null,
     };
   },
   mounted() {
@@ -48,7 +52,7 @@ methods: {
 			this.myServices.forEach(servicex => {
 				servicex.checked = false;
 			}); 
-			console.log(this.services);
+			console.log(this.myServices);
 
 		  });
 		},
@@ -130,7 +134,15 @@ methods: {
                 );
                 return { ...apartment, distance };
               })
-              .filter((apartment) => apartment.distance <= this.radius);
+			  .filter((apartment) => {
+				return (
+					apartment.distance <= this.radius &&
+					(this.rooms === null || apartment.rooms >= this.rooms) &&
+					(this.beds === null || apartment.beds >= this.beds) &&
+					(this.toilets === null || apartment.toilets >= this.toilets)
+				);
+			});
+            //   .filter((apartment) => apartment.distance <= this.radius);
 
 			this.filteredApartments = [...this.filteredApartments].sort((a, b) => a.distance - b.distance);
 
@@ -154,6 +166,7 @@ methods: {
 			);
 			return { ...apartment, distance }; // Aggiunge la distanza all'appartamento
 			})
+			
 			.filter((apartment) => apartment.distance <= this.radius); // Filtra per raggio
 
 			this.filteredApartments = [...this.filteredApartments].sort((a, b) => a.distance - b.distance);
@@ -202,7 +215,7 @@ methods: {
 					name: "apartments",
 					query: {  radius: this.radius },
 				});
-				// console.log(this.$router)
+				console.log(this.rooms)
 				this.filterApartments();
 			}
 		},
@@ -211,7 +224,19 @@ methods: {
 			this.myServices[index].checked = !this.myServices[index].checked;
 			// this.services[index].checked =
        		// 	this.services[index].checked === "checked" ? "" : "checked";
-			console.log(this.myServices[index])
+			
+			// Trova l'indice del numero da rimuovere
+			let indice = this.myFilterServices.indexOf(this.myServices[index].id);
+
+			if (indice !== -1) {
+				this.myFilterServices.splice(indice, 1);
+			}
+			else {
+				this.myFilterServices.push(this.myServices[index].id);
+				console.log(this.myFilterServices)
+				console.log(this.myServices[index])
+
+			}
 		},
 	}
   }
@@ -260,15 +285,15 @@ methods: {
 		<div class="row">
 			<div class="col-12 col-sm-6 col-md-4">
 				<label for="rooms">Numero stanze</label>
-				<input type="number" class="form-control" name="" id="rooms">
+				<input type="number" class="form-control" name=""  id="rooms" v-model="rooms">
 			</div>
 			<div class="col-12 col-sm-6 col-md-4">
 				<label for="beds">Numero letti</label>
-				<input type="number" class="form-control" name="" id="beds">
+				<input type="number" class="form-control" name="" id="beds" v-model="beds">
 			</div>
 			<div class="col-12 col-sm-6 col-md-4">
 				<label for="toilets" >Numero bagni</label>
-				<input type="number" class="form-control" name="" id="toilets">
+				<input type="number" class="form-control" name="" id="toilets" v-model="toilets">
 			</div>
 		</div>
 
