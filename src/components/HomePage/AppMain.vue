@@ -113,6 +113,10 @@ export default {
 <template>
   <main>
 
+    <div id="jumbotron" class="mb-4">
+
+    </div>
+
     <div class="container search-container">
 		<input
 		v-model="searchQuery"
@@ -237,6 +241,13 @@ ul {
 
 .suggestions-list li:hover {
   background: #f0f0f0;
+}
+
+#jumbotron {
+  background-image: url(/src/assets/img-residenza-scipioni-rome-23.jfif);
+  min-height: 450px;
+  background-size: cover;
+  background-position: center;
 }
 
 </style>
