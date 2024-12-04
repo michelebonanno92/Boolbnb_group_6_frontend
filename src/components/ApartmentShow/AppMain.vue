@@ -73,7 +73,7 @@ export default {
 <template>
   <main>
 
-	<div class="container  text-center mb-5"   style="width: 1000px;">
+	<div class="container  text-center mb-5">
 		<div class="row ">
 			<div  class="col-12 col-md-6 offset-md-3">
 				<div class="card p-4">
@@ -114,17 +114,17 @@ export default {
 					<div class="text-start">
 						<span class="mb-2 ">Servizi:</span>
 						<ul>
-							<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2">
+							<li v-for="service, index in apartment.services" :key="index" class="badge text-bg-secondary me-2 my-lable">
 								{{ service.service_name }}
 							</li>
 						</ul>
 					</div>
-					<div class="container d-flex justify-content-around mb-4">
+					<div class="container d-flex justify-content-around mt-4">
 						<div>
-							<router-link :to="{ name: 'apartments'}" class="btn btn-secondary btn-lg">Torna indietro</router-link>
+							<router-link :to="{ name: 'apartments'}" class="btn btn-outline-secondary">Torna indietro</router-link>
 						</div>
 						<div>
-							<router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-primary btn-lg">Invia messaggio</router-link>
+							<router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-outline-warning">Invia messaggio</router-link>
 						</div>
     				</div>
 
@@ -144,8 +144,16 @@ export default {
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
 
-main {
-  height: calc(100% - 180px);
+ul {
+	list-style: none;
+	padding: 0;
+	height: 100%;
+		.my-lable {
+		text-transform: capitalize;
+		padding: 5px 10px;
+		
+		}
+  
 }
 
 </style>

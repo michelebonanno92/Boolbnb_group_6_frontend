@@ -282,52 +282,51 @@ methods: {
   	<div class="container">
 		<div class="row">
 
-			<nav class="navbar navbar-expand-lg bg-body-tertiary">
-				<div class="container">
-	
-					<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
+			<nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-center">
+				<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
 	
 					<div class="btn-group">
-						<button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-							Action
+						<button type="button" class="btn btn-outline-dark mx-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							Servizi
 						</button>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu px-2">
 							<li v-for="(servicex, index) in this.myServices" :key="index" @click.stop="clickFilterService(index)" class="">
 								<input type="checkbox"  :name="servicex.service_name" :id="servicex.service_name" v-model="servicex.checked"  > {{servicex.service_name}}
 							</li>
 						</ul>
 					</div>
 	
-					<div class="w-50">
-						<label for="input-address">Ricerca per raggio</label>
+					
+					<div class=" d-flex justify-content-start align-items-center">
+						<label for="input-address">Distanza:</label>
 						<input
-							class="form-control"
+							class="form-control my-input mx-3"
 							id="input-address"
 							type="number"
 							v-model="radius"
 							placeholder="Raggio (km)"
 							
 						/>
-	
 					</div>
-					<button @click="search" class="btn btn-primary">Cerca</button>
-				</div>
+	
+					
+					<button @click="search" class="btn btn-outline-dark">Cerca</button>
 			</nav>
 		</div>
 
-		<div class="row">
-			<div class="col-12 col-sm-6 col-md-4">
-				<label for="rooms">Numero stanze</label>
-				<input type="number" class="form-control" name=""  id="rooms" v-model="rooms">
+		<div class="row justify-content-start">
+			<div class="col-12 col-md-4">
+				<label for="rooms" class="d-inline-block">Numero stanze</label>
+				<input type="number" class="form-control w-50 ms-2 d-inline-block" name="rooms"  id="rooms" v-model="rooms">
 			</div>
-			<div class="col-12 col-sm-6 col-md-4">
-				<label for="beds">Numero letti</label>
-				<input type="number" class="form-control" name="" id="beds" v-model="beds">
+			<div class="col-12 col-md-4">
+				<label for="beds" class="d-inline-block">Numero letti</label>
+				<input type="number" class="form-control w-50 ms-2 d-inline-block" name="beds" id="beds" v-model="beds">
 			</div>
-			<div class="col-12 col-sm-6 col-md-4">
-				<label for="toilets" >Numero bagni</label>
-				<input type="number" class="form-control" name="" id="toilets" v-model="toilets">
-			</div>
+			<div class="col-12 col-md-4">
+				<label for="toilets" class="d-inline-block">Numero bagni</label>
+				<input type="number" class="form-control w-50 ms-2 d-inline-block" name="toilets" id="toilets" v-model="toilets">
+			</div>		
 		</div>
 
 		<div class="row">
@@ -381,14 +380,14 @@ methods: {
 							<div class="text-start">
 								<span class="">Servizi:</span>
 								<ul class="mt-2">
-									<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2 ">
+									<li v-for="service, index in apartment.services" :key="index" class="badge text-bg-secondary me-2 m-1  my-lable">
 										{{ service.service_name }}
 									</li>
 								</ul>
 							</div>
 
 							<div>
-								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
+								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-warning w-100">Dettagli</router-link>
 							</div>
 						</div>
 					</div>
@@ -429,14 +428,14 @@ methods: {
 							<div class="text-start">
 								<span class="">Servizi:</span>
 								<ul class="mt-2 ">
-									<li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2">
+									<li v-for="service, index in apartment.services" :key="index"  class="badge text-bg-secondary me-2 m-1 my-lable">
 										{{ service.service_name }}
 									</li>
 								</ul>
 							</div>
 								
 							<div>
-								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
+								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-warning w-100">Dettagli</router-link>
 							</div>
 					</div>
 				
@@ -469,6 +468,11 @@ main {
   padding: 20px 0;
   height: calc(100% - 180px);
 }
+
+// .my-input {
+// 	width: 50%;
+// }
+
 .my-card {
     display: flex;
     flex-direction: column;
@@ -483,12 +487,12 @@ main {
 		list-style: none;
 		padding: 0;
 		height: 100%;
-	
-		.badge {
+			.my-lable {
+			text-transform: capitalize;
 			padding: 5px 10px;
-			margin-bottom: 4px;
-		}
-		
+			
+			}
+	
 	}
 }
 

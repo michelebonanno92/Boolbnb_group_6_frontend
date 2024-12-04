@@ -119,6 +119,8 @@ export default {
 <template>
   <main>
 
+    <div id="jumbotron" class="mb-4"></div>
+
     <div class="container search-container">
 		<input
 		v-model="searchQuery"
@@ -163,14 +165,14 @@ export default {
                   <div class="text-start">
                     <span class="mb-4">Servizi:</span>
                     <ul class="mt-2">
-                      <li v-for="service, index in apartment.services" :key="index" class="badge my-services text-bg-primary rounded-pill me-2">
+                      <li v-for="service, index in apartment.services" :key="index" class="badge text-bg-secondary me-2 m-1 my-lable">
                         {{ service.service_name }}
                       </li>
                     </ul>
                   </div>
 
                   <div>
-                    <router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-success w-100">Dettagli</router-link>
+                    <router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-warning w-100">Dettagli</router-link>
                   </div>
                 </div>
               </div>
@@ -192,14 +194,14 @@ main {
 }
 
 ul {
-  list-style: none;
-  padding: 0;
-  height: 100%;
-  
-  .badge {
-    padding: 5px 10px;
-    margin-bottom: 4px;
-  }
+	list-style: none;
+	padding: 0;
+	height: 100%;
+		.my-lable {
+		text-transform: capitalize;
+		padding: 5px 10px;
+		
+		}
   
 }
 
@@ -243,6 +245,13 @@ ul {
 
 .suggestions-list li:hover {
   background: #f0f0f0;
+}
+
+#jumbotron {
+  background-image: url(/src/assets/img-residenza-scipioni-rome-23.jfif);
+  min-height: 450px;
+  background-size: cover;
+  background-position: center;
 }
 
 </style>
