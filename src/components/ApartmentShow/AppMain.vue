@@ -4,13 +4,25 @@ import axios from 'axios';
 export default {
   data() {
     return { 
-      message: 'Main',
-	  	apartment: [],
-
+		message: 'Main',
+		apartment: [],
+		apartmentId: null
     }
   },
   mounted() {
+	setTimeout(() => {
+
 		this.getApartments();
+
+		
+	}, 1000);
+	// const apartmentId = this.apartment.id;
+	// console.log(this.apartmentId);
+	setTimeout(() => {
+		this.recordView(this.apartmentId);
+		
+	}, 2000);
+
 
   },
   methods: {
@@ -18,10 +30,10 @@ export default {
 		axios
 		  .get('http://127.0.0.1:8000/api/apartments' + '/' + this.$route.params.slug)
 		  .then((res) => {
-			console.log(res.data.apartment);
-			console.log(res.data.apartment.slug);
-
-	
+			
+			// console.log(res.data.apartment.id);
+			// console.log(res.data.apartment.slug);
+			this.apartmentId = res.data.apartment.id;
 			this.apartment = res.data.apartment;
 			// console.log(this.apartments);
     })},
@@ -32,7 +44,27 @@ export default {
       query: {
         slug: this.$route.params.slug
       }
-    })}
+    })},
+
+	recordView(apartmentId) {
+        const ipAddress = this.getClientIp(); // Funzione per ottenere l'IP del client
+        // Esegui una chiamata API per registrare la visualizzazione
+        axios.post('http://127.0.0.1:8000/api/new-view', {
+            apartment_id: apartmentId,
+            ip_address: ipAddress
+        })
+        .then(response => {
+            console.log('Visualizzazione registrata con successo:', response);
+        })
+        .catch(error => {
+            console.error('Errore nella registrazione della visualizzazione:', error);
+        });
+    },
+	getClientIp() {
+        // Nota: in un'applicazione reale dovresti usare un servizio per ottenere l'IP del client.
+		const randIpAddress =  (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
+        return randIpAddress; // Fai in modo che venga restituito l'IP dell'utente
+    },
 
   }
 }

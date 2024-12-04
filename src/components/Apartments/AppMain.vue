@@ -24,21 +24,20 @@ export default {
 		beds: this.$route.query.beds || null,
 		toilets: this.$route.query.toilets || null,
     };
-  },
-  mounted() {
-	  this.getServices();
-		this.getApartments();
+},
+mounted() {
+	this.getServices();
+	this.getApartments();
 
-		// Aggiunge l'ascoltatore per clic fuori dalla barra di ricerca o dalle suggestions
-		document.addEventListener('click', this.handleClickOutside);
-
-    },
+},
 
 beforeUnmount() {
     // Rimuove l'ascoltatore quando il componente viene distrutto
     document.removeEventListener('click', this.handleClickOutside);
 },
 methods: {
+
+
       
 	getServices() {
 		axios
