@@ -23,6 +23,12 @@ export default {
 
             this.apartments = res.data.apartments;
             // console.log(this.apartments);
+            this.apartments = this.apartments.sort((a, b) => {
+					// Primo ordinamento: sponsorizzati in cima
+              if (a.sponsorships.length > 0 && b.sponsorships.length === 0) {
+                return -1; // a viene prima di b
+              } 
+            });
            
           });
       },

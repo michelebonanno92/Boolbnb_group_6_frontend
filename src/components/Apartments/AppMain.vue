@@ -92,6 +92,13 @@ methods: {
 			// console.log(res.data.apartments);
 	
 			this.apartments = res.data.apartments;
+
+			this.apartments = this.apartments.sort((a, b) => {
+					// Primo ordinamento: sponsorizzati in cima
+					if (a.sponsorships.length > 0 && b.sponsorships.length === 0) {
+						return -1; // a viene prima di b
+					} 
+			});
 			console.log(res);
 			if (this.$route.query.lat && this.$route.query.lon) {
 			this.selectSuggestion(
@@ -183,7 +190,19 @@ methods: {
 			
 			.filter((apartment) => apartment.distance <= this.radius); // Filtra per raggio
 
-			this.filteredApartments = [...this.filteredApartments].sort((a, b) => a.distance - b.distance);
+			// this.filteredApartments = [...this.filteredApartments].sort((a, b) => a.distance - b.distance);
+			this.filteredApartments = [...this.filteredApartments]
+				.sort((a, b) => {
+					// Primo ordinamento: sponsorizzati in cima
+					if (a.sponsorships.length > 0 && b.sponsorships.length === 0) {
+						return -1; // a viene prima di b
+					} else if (a.sponsorships.length === 0 && b.sponsorships.length > 0) {
+						return 1; // b viene prima di a
+					} else {
+						// Secondo ordinamento: per distanza
+						return a.distance - b.distance;
+					}
+			});
 
 			// Pulisce la lista delle suggestions
 			this.suggestions = [];
