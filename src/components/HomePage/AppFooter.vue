@@ -9,14 +9,14 @@ export default {
 </script>
 
 <template>
-  <footer class="py-4 mt-2 bg-body-tertiary d-flex align-items center">
+  <footer class="py-4 mt-2 bg-body-tertiary d-flex align-items-center">
 
     <div class="container">
 
-      <div class="row justify-content-between align-items center">
+      <div class="row justify-content-between align-items-center">
 
         <div class="col-12 col-md-3">
-          © 2024 Airbnb, Inc
+          © 2024 Boolbnb
         </div>
         <div class="col-12 col-md-6">
           <div class="d-flex align-items-center justify-content-center">

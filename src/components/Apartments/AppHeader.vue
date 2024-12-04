@@ -9,12 +9,12 @@ export default {
 </script>
 
 <template>
-  	<header class="bg-body-tertiary py-3 mb-4">
+  	<header class="py-1">
 		<div class="container">
 			<div class="row">
 				<div class="col d-flex justify-content-start">
 					<router-link :to="{ name: 'home'}" class="link-logo">
-						<h1 class="text-black  mb-0">BoolBnb</h1>
+						<img src="/src/assets/boolbnbnew.png" alt="boolbnb" class="img-fluid">
 					</router-link>
 				</div>
 				<div class="col d-flex justify-content-end align-items-center">
@@ -38,6 +38,9 @@ export default {
 
 .link-logo {
 	text-decoration: none;
+	img {
+		height: 80px;
+	}
 }
 
 .btn-apartment {
