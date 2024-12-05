@@ -33,9 +33,9 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../assets/scss/partials/variables' as *;
-// header {
-// 	height: $headerHeight;
-// }
+header {
+	height: $headerHeight;
+}
 
 .link-logo {
 	text-decoration: none;
