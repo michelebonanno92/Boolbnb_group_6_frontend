@@ -88,7 +88,7 @@ export default {
 					<p>
 						{{ apartment.address }}
 					</p>
-					<p>
+					<p class="text-start">
 						{{ apartment.description }}
 					</p>
 					<ul class="text-start">

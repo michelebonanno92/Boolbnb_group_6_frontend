@@ -10,13 +10,13 @@ export default {
 
 <template>
 
-<footer class="py-4 mt-2 bg-body-tertiary d-flex align-items-center">
+<footer class="mt-2 bg-body-tertiary d-flex align-items-center">
   <div class="container text-center">
     <div class="row">
       <div class="col-12 col-md-3 d-flex align-items-center justify-content-center justify-content-md-start py-2">© 2024 Boolbnb</div>
 
     <div class="col-12 col-md-6 py-2">
-      <ul class="m-0">
+      <ul class="ms-0 p-0">
         <li>Privacy</li>
         <li>Termini</li>
         <li>Mappa del sito</li>
@@ -42,7 +42,11 @@ ul {
 //   text-align: center;
 //   padding: 20px 0;
 // }
-// footer {
-// 	height: $footerHeight;
-// }
+footer {
+	height: $footerHeight;
+  // position: absolute;
+  // bottom: 0;
+  // right: 0;
+  // left:0;
+}
 </style>

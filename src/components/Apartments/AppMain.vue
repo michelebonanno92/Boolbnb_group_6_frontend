@@ -279,12 +279,10 @@ methods: {
 
 	<main>
 
-  	<div class="container">
-		<div class="row">
-
-			<nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-center">
+  	<div class="container mt-4">
+		<div class="row mb-4">
+			<div class="col-12 col-lg-3 d-flex align-items-center py-2">
 				<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
-	
 					<div class="btn-group">
 						<button type="button" class="btn btn-outline-dark mx-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Servizi
@@ -295,42 +293,41 @@ methods: {
 							</li>
 						</ul>
 					</div>
-	
-					
-					<div class=" d-flex justify-content-start align-items-center">
-						<label for="input-address">Distanza:</label>
-						<input
-							class="form-control my-input mx-3"
-							id="input-address"
-							type="number"
-							v-model="radius"
-							placeholder="Raggio (km)"
-							
-						/>
-					</div>
-	
-					
-					<button @click="search" class="btn btn-outline-dark">Cerca</button>
-			</nav>
-		</div>
-
-		<div class="row justify-content-start">
-			<div class="col-12 col-md-4">
-				<label for="rooms" class="d-inline-block">Numero stanze</label>
-				<input type="number" class="form-control w-50 ms-2 d-inline-block" name="rooms"  id="rooms" v-model="rooms">
 			</div>
-			<div class="col-12 col-md-4">
-				<label for="beds" class="d-inline-block">Numero letti</label>
-				<input type="number" class="form-control w-50 ms-2 d-inline-block" name="beds" id="beds" v-model="beds">
+			<div class="col-12 col-lg-3 justify-content-start align-items-center d-flex py-2">
+				
+					<label for="input-address" class="me-2">Distanza:</label>
+					<input
+						class="form-control my-input me-2"
+						id="input-address"
+						type="number"
+						v-model="radius"
+						placeholder="Raggio (km)"
+						
+					/>
+				
+				
+					<label for="rooms" class=" me-2">Stanze</label>
+					<input type="number" class="form-control my-input me-2" name="rooms"  id="rooms" v-model="rooms">
+				
 			</div>
-			<div class="col-12 col-md-4">
-				<label for="toilets" class="d-inline-block">Numero bagni</label>
-				<input type="number" class="form-control w-50 ms-2 d-inline-block" name="toilets" id="toilets" v-model="toilets">
-			</div>		
-		</div>
+			<div class="col-12 col-lg-3 justify-content-start align-items-center d-flex py-2">
+				
+					<label for="beds" class="me-2">Letti</label>
+					<input type="number" class="form-control  my-input me-2" name="beds" id="beds" v-model="beds">
+				
+				
+					<label for="toilets" class="me-2">Bagni</label>
+					<input type="number" class="form-control my-input me-2" name="toilets" id="toilets" v-model="toilets">
+				
+			</div>
+			<div class="col-12 col-lg-3 py-2">
+				<button @click="search" class="btn btn-warning w-100">Cerca</button>
+			</div>
 
+		</div>
 		<div class="row">
-			<div class="my-5" >
+			<div class="my-2 mb-5">
 			<input
 			v-model="searchQuery"
 			@input="fetchSuggestions"
@@ -355,8 +352,9 @@ methods: {
 	  <!-- <div> {{ apartments }} </div> -->
 
 		<div v-if="filteredApartments.length">
-		<h3 class="mb-4">Appartamenti trovati entro {{ radius }} km:</h3>
 			<div class="container">
+				<h3 class="mb-4">Appartamenti trovati entro {{ radius }} km:</h3>
+
 				<div class="row">
 					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
 						<div class="card my-card p-3">
@@ -452,7 +450,9 @@ methods: {
 
 		<div v-else>
 			
-			<h3>Nessun Appartamento trovato</h3>
+			<div class="container">
+				<h3>Nessun Appartamento trovato</h3>
+			</div>
 
 		</div>
 		
@@ -464,14 +464,13 @@ methods: {
 @use '../../assets/scss/partials/variables' as *;
 
 main {
-  text-align: center;
-  padding: 20px 0;
-  height: calc(100% - 180px);
+  height: calc(100% - ($headerHeight + $footerHeight));
 }
 
-// .my-input {
-// 	width: 50%;
-// }
+.my-input {
+	max-width: 100px;
+
+}
 
 .my-card {
     display: flex;
