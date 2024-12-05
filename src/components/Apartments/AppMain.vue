@@ -464,7 +464,7 @@ methods: {
 @use '../../assets/scss/partials/variables' as *;
 
 main {
-  height: calc(100% - ($headerHeight + $footerHeight));
+  flex-grow: 1;
 }
 
 .my-input {

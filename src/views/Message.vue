@@ -26,13 +26,13 @@ export default {
 </script>
 
 <template>
-  <div>
+  
     <!-- 3) Utilizzo del componente -->
     <AppHeader />
     <AppMain />
 	  <AppFooter />
     
-  </div>
+  
 </template>
 
 <style lang="scss">

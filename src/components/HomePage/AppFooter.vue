@@ -42,9 +42,9 @@ ul {
 //   text-align: center;
 //   padding: 20px 0;
 // }
-// footer {
-// 	height: $footerHeight;
-// }
+footer {
+	height: $footerHeight;
+}
 </style>
 
 <!-- <footer class="py-4 mt-2 bg-body-tertiary d-flex align-items-center">

@@ -42,7 +42,7 @@ ul {
 //   text-align: center;
 //   padding: 20px 0;
 // }
-// footer {
-// 	height: $footerHeight;
-// }
+footer {
+	height: $footerHeight;
+}
 </style>

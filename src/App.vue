@@ -23,7 +23,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="container-general">
     <!-- 3) Utilizzo del componente -->
     <!-- <HomePage /> -->
     <router-view></router-view>
@@ -33,4 +33,9 @@ export default {
 
 <style lang="scss">
 @use 'assets/scss/main' as *;
+.container-general {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
 </style>

@@ -159,9 +159,8 @@ export default {
 @use '../../assets/scss/partials/variables' as *;
 
 main {
-  height: calc(100vh - ($headerHeight + $footerHeight));
+  flex-grow: 1;
 }
-
 span {
   color: red;
 }

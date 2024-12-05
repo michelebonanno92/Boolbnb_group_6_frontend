@@ -190,7 +190,7 @@ export default {
 @use '../../assets/scss/partials/variables' as *;
 
 main {
-  height: calc(100% - 180px);
+  flex-grow: 1;
 }
 
 ul {
