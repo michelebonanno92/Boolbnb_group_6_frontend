@@ -19,8 +19,9 @@ export default {
 				</div>
 				<div class="col d-flex justify-content-end align-items-center">
 					<div class="d-flex align-items-center">
-						<i class="fa-solid fa-user"></i>
 						<a href="http://127.0.0.1:8000/login" target="_blank" rel="noopener noreferrer" class="btn btn-apartment">
+							<i class="fa-solid fa-user"></i>
+
 							Login
 						</a>
 					</div>
