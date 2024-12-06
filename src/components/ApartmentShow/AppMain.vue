@@ -1,71 +1,90 @@
 <script>
 import axios from 'axios';
+import tt from '@tomtom-international/web-sdk-maps';
+
+
 
 export default {
   data() {
     return { 
-		message: 'Main',
-		apartment: [],
-		apartmentId: null
+      message: 'Main',
+      apartment: [],
+      marker: null,
+      map: null,
+      apartamentLat: null,
+      apartmentLong: null,
+      apartmentId: null,
+      apiKey: 'KtAYjlAUfMLakTMNV7iootfwwERDicp1' // Sostituisci con la tua API Key
     }
   },
   mounted() {
+    this.getApartments(); // Chiamata per recuperare gli appartamenti e inizializzare la mappa
 	setTimeout(() => {
-
-		this.getApartments();
-
-		
+		this.recordView()
 	}, 1000);
-	// const apartmentId = this.apartment.id;
-	// console.log(this.apartmentId);
-	setTimeout(() => {
-		this.recordView(this.apartmentId);
-		
-	}, 2000);
-
-
   },
   methods: {
     getApartments() {
-		axios
-		  .get('http://127.0.0.1:8000/api/apartments' + '/' + this.$route.params.slug)
-		  .then((res) => {
-			
-			// console.log(res.data.apartment.id);
-			// console.log(res.data.apartment.slug);
-			this.apartmentId = res.data.apartment.id;
-			this.apartment = res.data.apartment;
-			// console.log(this.apartments);
-    })},
-  
-  getPush(apartment) {
-    this.$router.push({
-      name: 'message',
-      query: {
-        slug: this.$route.params.slug
-      }
-    })},
+      axios
+        .get('http://127.0.0.1:8000/api/apartments' + '/' + this.$route.params.slug)
+        .then((res) => {
+          this.apartmentId = res.data.apartment.id;
+          this.apartment = res.data.apartment;
+          this.apartamentLat = parseFloat(res.data.apartment.latitude);
+          this.apartmentLong = parseFloat(res.data.apartment.longitude);
+          console.log("Latitudine:", this.apartamentLat, "Longitudine:", this.apartmentLong);
 
-	recordView(apartmentId) {
-        const ipAddress = this.getClientIp(); // Funzione per ottenere l'IP del client
-        // Esegui una chiamata API per registrare la visualizzazione
-        axios.post('http://127.0.0.1:8000/api/new-view', {
-            apartment_id: apartmentId,
-            ip_address: ipAddress
-        })
-        .then(response => {
-            console.log('Visualizzazione registrata con successo:', response);
-        })
-        .catch(error => {
-            console.error('Errore nella registrazione della visualizzazione:', error);
+          this.initializeMap(); // Inizializza la mappa dopo aver ricevuto i dati dell'appartamento
         });
     },
-	getClientIp() {
-        // Nota: in un'applicazione reale dovresti usare un servizio per ottenere l'IP del client.
-		const randIpAddress =  (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
-        return randIpAddress; // Fai in modo che venga restituito l'IP dell'utente
+
+    initializeMap() {
+      const map = tt.map({
+        key: this.apiKey,
+        container: 'map', // ID del div dove verrà montata la mappa
+        center: [this.apartmentLong, this.apartamentLat], // Centro iniziale della mappa
+        zoom: 14,
+      });
+
+      console.log('Mappa inizializzata:', map);
+
+      // Aggiungi il marker al centro della mappa
+      map.on('load', () => {
+        this.marker = new tt.Marker({ draggable: false }) // Marker non trascinabile
+          .setLngLat([this.apartmentLong, this.apartamentLat]) // Passa correttamente la longitudine e latitudine
+          .addTo(map);
+        console.log('Marker aggiunto:', this.marker);
+      });
     },
 
+    getPush(apartment) {
+      this.$router.push({
+        name: 'message',
+        query: {
+          slug: this.$route.params.slug
+        }
+      });
+    },
+
+    recordView() {
+      const ipAddress = this.getClientIp(); // Funzione per ottenere l'IP del client
+      axios.post('http://127.0.0.1:8000/api/new-view', {
+          apartment_id: this.apartmentId,
+          ip_address: ipAddress
+        })
+        .then(response => {
+          console.log('Visualizzazione registrata con successo:', response);
+        })
+        .catch(error => {
+          console.error('Errore nella registrazione della visualizzazione:', error);
+        });
+    },
+
+    getClientIp() {
+      // Nota: in un'applicazione reale dovresti usare un servizio per ottenere l'IP del client.
+      const randIpAddress = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
+      return randIpAddress; // Restituisce un IP generato casualmente
+    }
   }
 }
 </script>
@@ -91,6 +110,10 @@ export default {
 					<p class="text-start">
 						{{ apartment.description }}
 					</p>
+
+					<div class="map" id="map"></div>
+
+
 					<ul class="text-start">
 						<li>
 							Stanze: {{ apartment.rooms }}
@@ -156,6 +179,12 @@ ul {
 		
 		}
   
+}
+
+#map {
+  width: 100%;
+  height: 500px;
+  position: relative; /* Garantisce che il marker sia posizionato correttamente */
 }
 
 </style>
