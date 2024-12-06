@@ -112,67 +112,75 @@ methods: {
 
 	// Filtra gli appartamenti in base alla distanza
     filterApartments() {
-      const url = `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(
-        this.searchQuery
-      )}.json`;
+		if (this.searchQuery) {
+			const url = `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(
+				this.searchQuery
+			)}.json`;
 
-      // Chiamata API TomTom per ottenere le coordinate
-      axios
-        .get(url, {
-          params: {
-            key: this.apiKey,
-            limit: 1,
-			radius: this.radius
-          },
-        })
-        .then((response) => {
-          if (response.data.results.length > 0) {
-            const { lat, lon } = response.data.results[0].position;
+			axios
+				.get(url, {
+					params: {
+						key: this.apiKey,
+						limit: 1,
+						radius: this.radius,
+					},
+				})
+				.then((response) => {
+					if (response.data.results.length > 0) {
+						const { lat, lon } = response.data.results[0].position;
+						this.applyFilters(lat, lon);
+					}
+				})
+				.catch((error) => {
+					console.error("Errore nella chiamata TomTom:", error);
+				});
+		} else {
+			// Usa una posizione di default se non c'è un indirizzo
+			this.applyFilters(null, null);
+		}
+	},
 
-            // Filtra appartamenti entro il raggio
-            this.filteredApartments = this.apartments
-              .map((apartment) => {
-                const distance = this.calculateDistance(
-                  lat,
-                  lon,
-                  apartment.latitude,
-                  apartment.longitude
-                );
-                return { ...apartment, distance };
-              })
-			  .filter((apartment) => {
-
+	applyFilters(lat, lon) {
+		this.filteredApartments = this.apartments
+			.map((apartment) => {
+				const distance = lat && lon
+					? this.calculateDistance(
+						lat,
+						lon,
+						apartment.latitude,
+						apartment.longitude
+					)
+					: 0; // Nessuna distanza se lat e lon sono null
+				return { ...apartment, distance };
+			})
+			.filter((apartment) => {
 				const matchesBasicCriteria =
-				apartment.distance <= this.radius &&
-				(this.rooms === null || apartment.rooms >= this.rooms) &&
-				(this.beds === null || apartment.beds >= this.beds) &&
-				(this.toilets === null || apartment.toilets >= this.toilets);
+					(lat && lon ? apartment.distance <= this.radius : true) &&
+					(this.rooms === null || apartment.rooms >= this.rooms) &&
+					(this.beds === null || apartment.beds >= this.beds) &&
+					(this.toilets === null || apartment.toilets >= this.toilets);
 
-				// Verifica se tutti i servizi selezionati sono inclusi nell'appartamento
 				const matchesServices =
-				this.myFilterServices.length === 0 || // Nessun filtro selezionato
-				this.myFilterServices.every((serviceId) =>
-					apartment.services.some((service) => service.id === serviceId)
-				);
+					this.myFilterServices.length === 0 || // Nessun filtro selezionato
+					this.myFilterServices.every((serviceId) =>
+						apartment.services.some((service) => service.id === serviceId)
+					);
 
 				return matchesBasicCriteria && matchesServices;
-				// return (
-				// 	apartment.distance <= this.radius &&
-				// 	(this.rooms === null || apartment.rooms >= this.rooms) &&
-				// 	(this.beds === null || apartment.beds >= this.beds) &&
-				// 	(this.toilets === null || apartment.toilets >= this.toilets)
-				// );
 			});
-            //   .filter((apartment) => apartment.distance <= this.radius);
 
-			this.filteredApartments = [...this.filteredApartments].sort((a, b) => a.distance - b.distance);
+		// Ordina i risultati
+		this.filteredApartments = [...this.filteredApartments].sort((a, b) => {
+			if (a.sponsorships.length > 0 && b.sponsorships.length === 0) {
+				return -1;
+			} else if (a.sponsorships.length === 0 && b.sponsorships.length > 0) {
+				return 1;
+			} else {
+				return a.distance - b.distance;
+			}
+		});
+	},
 
-          }
-        })
-        .catch((error) => {
-          console.error("Errore nella chiamata TomTom:", error);
-        });
-    },
 
 		selectSuggestion(latitude, longitude ) {
 
@@ -242,14 +250,21 @@ methods: {
 		},
 
 		search() {
-			if (this.searchQuery != '' ) {
-				
+			if (
+				this.searchQuery !== "" || 
+				this.radius > 0 || 
+				this.rooms !== null || 
+				this.beds !== null || 
+				this.toilets !== null || 
+				this.myFilterServices.length > 0
+			) {
 				this.$router.push({
 					name: "apartments",
-					query: {  radius: this.radius },
+					query: { radius: this.radius },
 				});
-				console.log(this.rooms)
 				this.filterApartments();
+			} else {
+				console.log("Inserisci almeno un filtro per cercare.");
 			}
 		},
 
@@ -322,7 +337,7 @@ methods: {
 				
 			</div>
 			<div class="col-12 col-lg-3 py-2">
-				<button @click="search" class="btn btn-warning w-100">Cerca</button>
+				<button type="submit" @click="search" class="btn btn-warning w-100">Cerca</button>
 			</div>
 
 		</div>
@@ -358,7 +373,7 @@ methods: {
 				<div class="row">
 					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
 						<div class="card my-card p-3">
-							<div class="text-center">
+							<div class="text-center mb-2">
 								<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
 							</div>
 							<h4 class="mb-2">
@@ -409,7 +424,9 @@ methods: {
 				<div  v-for="apartment in apartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
 
 					<div class="card my-card p-3">
-						<img :src="apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
+						<div class="text-center mb-2">
+							<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
+						</div>
 						<div class="card-body">
 							<h5 class="card-title">
 								{{ apartment.title }}
