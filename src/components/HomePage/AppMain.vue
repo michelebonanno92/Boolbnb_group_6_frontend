@@ -151,28 +151,33 @@ export default {
                   <h4 class="mb-2 text-center">
                     {{ apartment.title }} 
                   </h4>
-                  <ul class="text-start h-100">
-                    <li>
-                      Stanze: {{ apartment.rooms }}
-                    </li>
-                    <li>
-                      Letti: {{ apartment.beds }}
-                    </li>
-                    <li>
-                      Bagni: {{ apartment.toilets }}
-                    </li>
-                  </ul>
-                  <div class="text-start">
-                    <span class="mb-4">Servizi:</span>
-                    <ul class="mt-2">
-                      <li v-for="service, index in apartment.services" :key="index" class="badge text-bg-secondary me-2 m-1 my-lable">
-                        {{ service.service_name }}
-                      </li>
-                    </ul>
+                	<div class="d-flex align-items-center justify-content-around text-start my-4">
+						<div>
+							<span class="me-2">Stanze </span>
+							<i class="fa-solid fa-door-closed my-icon me-2"></i>
+							<strong class="fs-5">{{ apartment.rooms }}</strong>
+						</div>
+						<div>
+							<span class="me-2">Letti </span>
+							<i class="fa-solid fa-bed my-icon me-2"></i>
+							<strong class="fs-5">{{ apartment.beds }}</strong>
+						</div>
+						<div>
+							<span class="me-2">Bagni </span>
+							<i class="fa-solid fa-toilet my-icon me-2"></i>
+							<strong class="fs-5">{{ apartment.toilets }}</strong>
+						</div>
+					</div>
+                  <div class="text-start h-100">
+						<ul class="mt-2">
+							<li v-for="service, index in apartment.services" :key="index" class="btn btn-outline-warning fw-bold text-dark me-2 m-1 my-lable" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;">
+								{{ service.service_name }}
+							</li>
+						</ul>
                   </div>
 
                   <div>
-                    <router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-outline-warning w-100">Dettagli</router-link>
+                    <router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-danger w-100">Dettagli</router-link>
                   </div>
                 </div>
               </div>
@@ -205,6 +210,9 @@ ul {
   
 }
 
+.my-icon {
+	color: #FAB12F;
+}
 .my-card {
   display: flex;
   flex-direction: column;

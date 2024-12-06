@@ -92,62 +92,62 @@ export default {
 <template>
   <main>
 
-	<div class="container  text-center mb-5">
-		<div class="row ">
+	<div class="container text-center mb-5">
+		<div class="row">
 			<div  class="col-12 col-md-6 offset-md-3">
 				<div class="card p-4">
-					<div v-if="apartment.image">
-							<img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid rounded">
-					</div>
-					<h4 class="mt-4">
+
+					<h4 class="fs-2 fw-bold">
 						{{ apartment.title }}
 					</h4>
 					
-					
 					<p>
-						{{ apartment.address }}
+						<i class="fa-solid fa-location-dot text-danger me-1"></i>
+						<span>{{ apartment.address }}</span>
 					</p>
+
+					<div v-if="apartment.image" class="mb-4">
+							<img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid rounded">
+					</div>
+					
 					<p class="text-start">
 						{{ apartment.description }}
 					</p>
-
+					
 					<div class="map" id="map"></div>
 
+					<div class="d-flex align-items-center justify-content-around text-start my-4">
+						<div>
+							<span class="me-2">Stanze </span>
+							<i class="fa-solid fa-door-closed my-icon me-2"></i>
+							<strong class="fs-5">{{ apartment.rooms }}</strong>
+						</div>
+						<div>
+							<span class="me-2">Letti </span>
+							<i class="fa-solid fa-bed my-icon me-2"></i>
+							<strong class="fs-5">{{ apartment.beds }}</strong>
+						</div>
+						<div>
+							<span class="me-2">Bagni </span>
+							<i class="fa-solid fa-toilet my-icon me-2"></i>
+							<strong class="fs-5">{{ apartment.toilets }}</strong>
+						</div>
+					</div>
 
-					<ul class="text-start">
-						<li>
-							Stanze: {{ apartment.rooms }}
-						</li>
-						<li>
-							Letti: {{ apartment.beds }}
-						</li>
-						<li>
-							Bagni: {{ apartment.toilets }}
-						</li>
-					</ul>
-
-					<!-- <div  class="mt-4 h-100">
-						<ul class="service-list">
-							<li v-for="service, index in apartment.services" :key="index">
-								{{ service.service_name }}
-							</li>
-						</ul>
-					</div> -->
 
 					<div class="text-start">
-						<span class="mb-2 ">Servizi:</span>
 						<ul>
-							<li v-for="service, index in apartment.services" :key="index" class="badge text-bg-secondary me-2 my-lable">
+							<li v-for="service, index in apartment.services" :key="index" class="btn btn-outline-warning fw-bold text-dark me-2 m-1 my-lable" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .75rem;">
 								{{ service.service_name }}
 							</li>
 						</ul>
 					</div>
-					<div class="container d-flex justify-content-around mt-4">
+					<div class="container d-flex justify-content-around my-4">
 						<div>
 							<router-link :to="{ name: 'apartments'}" class="btn btn-outline-secondary">Torna indietro</router-link>
 						</div>
 						<div>
-							<router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-outline-warning">Invia messaggio</router-link>
+							<router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-danger">Invia messaggio</router-link>
 						</div>
     				</div>
 
@@ -168,6 +168,9 @@ export default {
 @use '../../assets/scss/partials/variables' as *;
 main {
   flex-grow: 1;
+}
+.my-icon {
+	color: #FAB12F;
 }
 ul {
 	list-style: none;

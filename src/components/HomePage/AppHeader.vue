@@ -20,13 +20,13 @@ export default {
 				<div class="col d-flex justify-content-end align-items-center">
 					<div class="d-flex align-items-center">
 						<router-link :to="{ name: 'apartments'}" class="btn btn-apartment me-4">
-							<i class="fa-solid fa-house-flag"></i>
+							<i class="fa-solid fa-house-flag text-warning"></i>
 							Appartamenti
 						</router-link>
 					</div>
 					<div class="d-flex align-items-center">
 						<a href="http://127.0.0.1:8000/login" target="_blank" rel="noopener noreferrer" class="btn btn-apartment">
-							<i class="fa-solid fa-user"></i>
+							<i class="fa-solid fa-user text-warning"></i>
 							Login
 						</a>
 					</div>
