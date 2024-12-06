@@ -5,6 +5,7 @@ import ApartmentShow from './views/ApartmentShow.vue';
 import Apartments from './views/Apartments.vue';
 import NotFoundPage from './views/NotFoundPage.vue';
 import Message from './views/Message.vue';
+import mappa from './views/mappa.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -34,6 +35,12 @@ const router = createRouter({
             name: 'message',
             component: Message
         },
+        {
+            path: '/mappa',
+            name: 'mappe',
+            component: mappa
+        },
+        
     ]
 });
 
