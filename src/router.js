@@ -34,6 +34,7 @@ const router = createRouter({
             name: 'message',
             component: Message
         },
+        
     ]
 });
 

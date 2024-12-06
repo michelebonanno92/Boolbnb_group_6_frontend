@@ -10,16 +10,18 @@ import AppHeader from '../components/ApartmentShow/AppHeader.vue';
 import AppMain from '../components/ApartmentShow/AppMain.vue';
 import AppFooter from '../components/ApartmentShow/AppFooter.vue';
 
+
 export default {
   data() {
     return { 
+      
     }
   },
   // 2) Dichiarazione del componente
   components: {
     AppHeader,
     AppMain,
-	  AppFooter
+	  AppFooter,
   },
 
 }
