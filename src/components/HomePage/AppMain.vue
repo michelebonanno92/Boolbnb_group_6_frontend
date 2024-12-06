@@ -126,10 +126,11 @@ export default {
 		v-model="searchQuery"
 		@input="fetchSuggestions"
 		placeholder="Cerca un indirizzo..."
-		class="search-bar mb-4"
+		class="search-bar "
 		/>
-		<ul v-if="suggestions.length" class="suggestions-list text-start">
+		<ul v-if="suggestions.length" class="suggestions-list text-start list-group">
 			<li 
+        class="list-group-item"
 				v-for="(suggestion, index) in suggestions"
 				:key="index"
 				@click="selectSuggestion(suggestion)"
@@ -139,7 +140,7 @@ export default {
 		</ul>
 
     <div >
-      <h3 class="mb-4">Appartamenti in evidenza</h3>
+      <h3 class="my-4">Appartamenti in evidenza</h3>
         <div class="container">
           <div class="row">
             
@@ -233,27 +234,27 @@ ul {
   border-radius: 4px;
 }
 
-.suggestions-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background: white;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  position: absolute;
-  width: 1200px;
-  z-index: 10;
-}
+// .suggestions-list {
+//   list-style: none;
+//   padding: 0;
+//   margin: 0;
+//   background: white;
+//   border: 1px solid #ccc;
+//   max-height: 200px;
+//   overflow-y: auto;
+//   position: absolute;
+//   width: 1200px;
+//   z-index: 10;
+// }
 
-.suggestions-list li {
-  padding: 8px;
-  cursor: pointer;
-}
+// .suggestions-list li {
+//   padding: 8px;
+//   cursor: pointer;
+// }
 
-.suggestions-list li:hover {
-  background: #f0f0f0;
-}
+// .suggestions-list li:hover {
+//   background: #f0f0f0;
+// }
 
 #jumbotron {
   background-image: url(/src/assets/img-residenza-scipioni-rome-23.jfif);

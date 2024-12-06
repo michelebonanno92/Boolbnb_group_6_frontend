@@ -341,23 +341,25 @@ methods: {
 			</div>
 
 		</div>
-		<div class="row">
-			<div class="my-2 mb-5">
+		<div class="row ">
+			<div class="my-2 me-3 mb-5 ">
 			<input
 			v-model="searchQuery"
 			@input="fetchSuggestions"
 			placeholder="Cerca un indirizzo..."
 			class="search-bar"
 			/>
-			<ul v-if="suggestions.length" class="suggestions-list text-start">
-				<li
-					v-for="(suggestion, index) in suggestions"
-					:key="index"
-					@click="suggestion.position ? selectSuggestion(suggestion.position.lat, suggestion.position.lon) : null"
-				>
-					{{ suggestion.address.freeformAddress }}
-				</li>
-			</ul>
+				<ul v-if="suggestions.length" class="suggestions-list text-start list-group">
+					<li
+						class="list-group-item"
+						v-for="(suggestion, index) in suggestions"
+						:key="index"
+						@click="suggestion.position ? selectSuggestion(suggestion.position.lat, suggestion.position.lon) : null"
+					>
+						{{ suggestion.address.freeformAddress }}
+					</li>
+				</ul>
+
 			</div>
 
 		</div>
@@ -539,27 +541,27 @@ h1 {
   border-radius: 4px;
 }
 
-.suggestions-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background: white;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  position: absolute;
-  width: 1200px;
-  z-index: 10;
-}
+// .suggestions-list {
+//   list-style: none;
+//   padding: 0;
+//   margin: 0;
+//   background: white;
+//   border: 1px solid #ccc;
+//   max-height: 200px;
+//   overflow-y: auto;
+//   position: absolute;
+//   width: 100%;
+//   z-index: 1;
+// }
 
-.suggestions-list li {
-  padding: 8px;
-  cursor: pointer;
-}
+// .suggestions-list li {
+//   padding: 8px;
+//   cursor: pointer;
+// }
 
-.suggestions-list li:hover {
-  background: #f0f0f0;
-}
+// .suggestions-list li:hover {
+//   background: #f0f0f0;
+// }
 
 // .completed {
 //   text-decoration: line-through;
