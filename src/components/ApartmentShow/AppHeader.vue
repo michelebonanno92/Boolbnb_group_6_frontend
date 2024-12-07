@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  	<header class="py-4">
+  	<header class="py-4 mb-4">
 		<div class="container">
 			<div class="row">
 				<div class="col d-flex justify-content-start">
@@ -36,6 +36,7 @@ export default {
 @use '../../assets/scss/partials/variables' as *;
 header {
 	height: $headerHeight;
+	border-bottom: 1px solid lightgrey;
 }
 
 .link-logo {

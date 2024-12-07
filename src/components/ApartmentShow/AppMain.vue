@@ -98,7 +98,7 @@ export default {
 
 	<div class="container text-center mb-5">
 		<div class="row">
-			<div  class="col-12 col-md-6 offset-md-3">
+			<div  class="col-12 col-md-8 offset-md-2">
 				<div class="card p-4">
 
 					<h4 class="fs-2 fw-bold">
@@ -118,7 +118,7 @@ export default {
 						{{ apartment.description }}
 					</p>
 					
-					<div class="map" id="map"></div>
+					<div class="map w-100" id="map"></div>
 
 					<div class="d-flex align-items-center justify-content-around text-start my-4">
 						<div>
