@@ -296,8 +296,8 @@ methods: {
 
   	<div class="container mt-4">
 		<div class="row  mb-4">
-			<div class="col-12 col-sm-12 col-md-6 col-lg-3 d-flex align-items-center py-2 mb-2 mb-2">
-				<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
+			<div class="col-12 col-sm-12 col-md-4 col-lg-3 d-flex align-items-center py-2 mb-2 mb-2">
+				<a class="navbar-brand align-items-center me-5 me-md-3" href="#">Ricerca appartamenti</a>
 					<div class="btn-group">
 						<button type="button" class="btn btn-outline-dark mx-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Servizi
@@ -309,9 +309,9 @@ methods: {
 						</ul>
 					</div>
 			</div>
-			<div class="col-12 col-sm-12 col-md-6  col-lg-2 justify-content-start align-items-center d-flex flex-grow-1 py-0 ms-2 mb-2 ">
+			<div class="col-12 col-sm-12 col-md-6  col-lg-2 justify-content-start align-items-center d-flex flex-grow-1 py-0 mb-2  ms-md-5 ">
 				
-					<label for="input-address" class="me-2">Distanza:</label>
+					<label for="input-address" class="me-2">Distanza</label>
 					<input
 						class="form-control my-input me-2"
 						id="input-address"
