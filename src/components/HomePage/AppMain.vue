@@ -179,8 +179,8 @@ export default {
 				<div  v-for="apartment in apartments.filter(a => a.sponsorships && a.sponsorships.length > 0)" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
 					<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="apartment-card-link text-dark">
 						<div class="my-card p-3">
-							<div class="text-center mb-1">
-								<img :src=" apartment.full_image_url " class="img-fluid mb-2" :alt=" apartment.title ">
+							<div class="text-center my-img-container mb-2">
+								<img :src=" apartment.full_image_url " class="img-fluid my-img mb-2" :alt=" apartment.title ">
 							</div>
 							<h4 class="fw-bold mb-1">
 								{{ apartment.title }} 
@@ -279,27 +279,15 @@ ul {
   border-radius: 4px;
 }
 
-// .suggestions-list {
-//   list-style: none;
-//   padding: 0;
-//   margin: 0;
-//   background: white;
-//   border: 1px solid #ccc;
-//   max-height: 200px;
-//   overflow-y: auto;
-//   position: absolute;
-//   width: 1200px;
-//   z-index: 10;
-// }
-
-// .suggestions-list li {
-//   padding: 8px;
-//   cursor: pointer;
-// }
-
-// .suggestions-list li:hover {
-//   background: #f0f0f0;
-// }
+.my-img-container {
+  height: 200px;
+  .my-img {
+    width: 100%; /* L'immagine occupa tutta la larghezza */
+    height: 100%; /* L'immagine occupa tutta l'altezza del carosello */
+    object-fit: cover; /* Riempi il contenitore mantenendo le proporzioni */
+    object-position: center; /* Centra l'immagine */
+  }
+}
 
 #carouselExample {
   max-height: 600px; /* Altezza massima del carosello */
