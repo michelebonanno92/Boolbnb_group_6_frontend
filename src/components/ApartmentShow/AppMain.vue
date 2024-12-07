@@ -139,9 +139,9 @@ export default {
 					</div>
 
 
-					<div class="text-start">
-						<ul>
-							<li v-for="service, index in apartment.services" :key="index" class="btn btn-outline-warning fw-bold text-dark me-2 m-1 my-lable" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .75rem;">
+					<div class="text-start h-100">
+						<ul class="p-0 d-flex flex-wrap">
+							<li v-for="service, index in apartment.services" :key="index" class="fw-bold text-secondary me-3 p-0 my-lable">
 								{{ service.service_name }}
 							</li>
 						</ul>
