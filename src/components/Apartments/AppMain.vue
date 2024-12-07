@@ -374,42 +374,44 @@ methods: {
 
 				<div class="row">
 					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
-						<div class="card my-card p-3">
-							<div class="text-center mb-2">
-								<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
-							</div>
-							<h4 class="mb-2">
-								{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km) 
-							</h4>
-							<div class="d-flex align-items-center justify-content-around text-start my-4">
-								<div>
-									<span class="me-2">Stanze </span>
-									<i class="fa-solid fa-door-closed my-icon me-2"></i>
-									<strong class="fs-5">{{ apartment.rooms }}</strong>
+						<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="apartment-card-link text-dark">
+							<div class="my-card p-3">
+								<div class="text-center mb-1">
+									<img :src=" apartment.full_image_url " class="img-fluid mb-2" :alt=" apartment.title ">
 								</div>
-								<div>
-									<span class="me-2">Letti </span>
-									<i class="fa-solid fa-bed my-icon me-2"></i>
-									<strong class="fs-5">{{ apartment.beds }}</strong>
+								<h4 class="fw-bold mb-1">
+									{{ apartment.title }} 
+								</h4>
+								<strong class="mb-1">
+									{{ apartment.address }} 
+								</strong>
+								<div class="d-flex align-items-center justify-content-start text-start mb-2">
+									<div>
+										<!-- <span class="me-2">Stanze </span> -->
+										<i class="fa-solid fa-door-closed my-icon me-2"></i>
+										<strong class="fs-5 me-3">{{ apartment.rooms }}</strong>
+									</div>
+									<div>
+										<!-- <span class="me-2">Letti </span> -->
+										<i class="fa-solid fa-bed my-icon me-2"></i>
+										<strong class="fs-5 me-3">{{ apartment.beds }}</strong>
+									</div>
+									<div>
+										<!-- <span class="me-2">Bagni </span> -->
+										<i class="fa-solid fa-toilet my-icon me-2"></i>
+										<strong class="fs-5 me-3">{{ apartment.toilets }}</strong>
+									</div>
 								</div>
-								<div>
-									<span class="me-2">Bagni </span>
-									<i class="fa-solid fa-toilet my-icon me-2"></i>
-									<strong class="fs-5">{{ apartment.toilets }}</strong>
-								</div>
-							</div>
-							<div class="text-start h-100">
-								<ul class="mt-2">
-									<li v-for="service, index in apartment.services" :key="index" class="btn btn-outline-warning fw-bold text-dark me-2 m-1 my-lable" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;">
+								<div class="text-start h-100">
+								<ul class="p-0 d-flex flex-wrap">
+									<li v-for="service, index in apartment.services" :key="index" class="fw-bold text-secondary me-3 p-0 my-lable">
 										{{ service.service_name }}
 									</li>
 								</ul>
 							</div>
-
-							<div>
-								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-danger w-100">Dettagli</router-link>
+								
 							</div>
-						</div>
+						</router-link>
 					</div>
 				</div>
 			</div>
@@ -425,46 +427,44 @@ methods: {
 				
 				<div  v-for="apartment in apartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
 
-					<div class="card my-card p-3">
-						<div class="text-center mb-2">
-							<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">
-								{{ apartment.title }}
-							</h5>
-						
-							<div class="d-flex align-items-center justify-content-around text-start my-4">
-								<div>
-									<span class="me-2">Stanze </span>
-									<i class="fa-solid fa-door-closed my-icon me-2"></i>
-									<strong class="fs-5">{{ apartment.rooms }}</strong>
+					<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="apartment-card-link text-dark">
+						<div class="my-card p-3">
+								<div class="text-center mb-1">
+									<img :src=" apartment.full_image_url " class="img-fluid mb-2" :alt=" apartment.title ">
 								</div>
-								<div>
-									<span class="me-2">Letti </span>
-									<i class="fa-solid fa-bed my-icon me-2"></i>
-									<strong class="fs-5">{{ apartment.beds }}</strong>
+								<h4 class="fw-bold mb-1">
+									{{ apartment.title }} 
+								</h4>
+								<strong class="mb-1">
+									{{ apartment.address }} 
+								</strong>
+								<div class="d-flex align-items-center justify-content-start text-start mb-1">
+									<div>
+										<!-- <span class="me-2">Stanze </span> -->
+										<i class="fa-solid fa-door-closed my-icon me-2"></i>
+										<strong class="fs-5 me-3">{{ apartment.rooms }}</strong>
+									</div>
+									<div>
+										<!-- <span class="me-2">Letti </span> -->
+										<i class="fa-solid fa-bed my-icon me-2"></i>
+										<strong class="fs-5 me-3">{{ apartment.beds }}</strong>
+									</div>
+									<div>
+										<!-- <span class="me-2">Bagni </span> -->
+										<i class="fa-solid fa-toilet my-icon me-2"></i>
+										<strong class="fs-5 me-3">{{ apartment.toilets }}</strong>
+									</div>
 								</div>
-								<div>
-									<span class="me-2">Bagni </span>
-									<i class="fa-solid fa-toilet my-icon me-2"></i>
-									<strong class="fs-5">{{ apartment.toilets }}</strong>
+								<div class="text-start h-100">
+									<ul class="p-0 d-flex flex-wrap">
+										<li v-for="service, index in apartment.services" :key="index" class="fw-bold text-secondary me-3 p-0 my-lable">
+											{{ service.service_name }}
+										</li>
+									</ul>
 								</div>
-							</div>
-							
-						</div>
-							<div class="text-start h-100">
-								<ul class="mt-2 ">
-									<li v-for="service, index in apartment.services" :key="index"  class="btn btn-outline-warning fw-bold text-dark me-2 m-1 my-lable" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;">
-										{{ service.service_name }}
-									</li>
-								</ul>
-							</div>
 								
-							<div>
-								<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-danger w-100">Dettagli</router-link>
-							</div>
-					</div>
+						</div>
+					</router-link>
 				
 				
 				</div>
@@ -506,26 +506,40 @@ main {
 }
 
 .my-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    box-shadow: 5px 5px 10px 3px lightgray;
-    &:hover{
-        box-shadow: 5px 5px 10px 12px lightgray;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 20px;
+//   box-shadow: 5px 5px 10px 3px lightgray;
+  &:hover{
+    box-shadow: 5px 5px 10px 12px lightgray;
+    
+  }
+  img {
+	border-radius: 20px;
 
-    }
+  }
 	
-	ul {
-		list-style: none;
-		padding: 0;
-		height: 100%;
-			.my-lable {
+}
+.apartment-card-link {
+	text-decoration: none;
+
+}
+.my-lable {
 			text-transform: capitalize;
 			padding: 5px 10px;
 			
+}
+ul {
+		list-style: none;
+		padding: 0;
+		// height: 100%;
+			.my-lable {
+			text-transform: capitalize;
+			// padding: 5px 10px;
+			
 			}
 	
-	}
 }
 
 
