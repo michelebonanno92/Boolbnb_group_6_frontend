@@ -8,10 +8,12 @@ export default {
       apiKey: 'KtAYjlAUfMLakTMNV7iootfwwERDicp1', // Inserisci la tua API Key qui
       apartments: [],
       filteredApartments: [],
+	//   myCarousel: null,
     }
   },
   mounted() {
     this.getApartments();
+	// this.startCarousel(),
     },
   methods: {
     // chiamata api apartments
@@ -111,82 +113,114 @@ export default {
       return deg * (Math.PI / 180);
     },
 
+	// startCarousel() {
+	// 	this.myCarousel = new bootstrap.Carousel(document.getElementById('carouselExample'), {
+	// 		ride: 'carousel' // Avvia automaticamente
+	// 		});
+	// }
+
     
   },
 }
 </script>
 
 <template>
-  <main>
-
-    <div id="jumbotron" class="mb-4"></div>
-
-    <div class="container search-container">
-		<input
-		v-model="searchQuery"
-		@input="fetchSuggestions"
-		placeholder="Cerca un indirizzo..."
-		class="search-bar "
-		/>
-		<ul v-if="suggestions.length" class="suggestions-list text-start list-group">
-			<li 
-        class="list-group-item"
-				v-for="(suggestion, index) in suggestions"
-				:key="index"
-				@click="selectSuggestion(suggestion)"
-			>
-				{{ suggestion.address.freeformAddress }}
-			</li>
-		</ul>
-
-    <div >
-      <h3 class="my-4">Appartamenti in evidenza</h3>
-        <div class="container">
-          <div class="row">
-            
-            <div  v-for="apartment in apartments.filter(a => a.sponsorships && a.sponsorships.length > 0)" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
-                <div class="card my-card p-3">
-                  <div class="text-center">
-                    <img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
-                  </div>
-                  <h4 class="mb-2 text-center">
-                    {{ apartment.title }} 
-                  </h4>
-                	<div class="d-flex align-items-center justify-content-around text-start my-4">
-						<div>
-							<span class="me-2">Stanze </span>
-							<i class="fa-solid fa-door-closed my-icon me-2"></i>
-							<strong class="fs-5">{{ apartment.rooms }}</strong>
-						</div>
-						<div>
-							<span class="me-2">Letti </span>
-							<i class="fa-solid fa-bed my-icon me-2"></i>
-							<strong class="fs-5">{{ apartment.beds }}</strong>
-						</div>
-						<div>
-							<span class="me-2">Bagni </span>
-							<i class="fa-solid fa-toilet my-icon me-2"></i>
-							<strong class="fs-5">{{ apartment.toilets }}</strong>
-						</div>
-					</div>
-                  <div class="text-start h-100">
-						<ul class="mt-2">
-							<li v-for="service, index in apartment.services" :key="index" class="btn btn-outline-warning fw-bold text-dark me-2 m-1 my-lable" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;">
-								{{ service.service_name }}
-							</li>
-						</ul>
-                  </div>
-
-                  <div>
-                    <router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-danger w-100">Dettagli</router-link>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div>
+	<main>
 		
+		<div id="carouselExample" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="5000">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="/src/assets/bnb-hd-3.jpg" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="/src/assets/bnb-hd-5.jpg" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="/src/assets/bnb-hd-4.jpg" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="/src/assets/img-residenza-scipioni-rome-23.jfif" class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
-  </div>
+		
+    	<!-- <div id="jumbotron" class="mb-4">
+		</div> -->
+
+		<div class="container search-container">
+			<input
+			v-model="searchQuery"
+			@input="fetchSuggestions"
+			placeholder="Cerca un indirizzo..."
+			class="search-bar "
+			/>
+			<ul v-if="suggestions.length" class="suggestions-list text-start list-group">
+				<li 
+			class="list-group-item"
+					v-for="(suggestion, index) in suggestions"
+					:key="index"
+					@click="selectSuggestion(suggestion)"
+				>
+					{{ suggestion.address.freeformAddress }}
+				</li>
+			</ul>
+
+		<div >
+		<h3 class="my-4">Appartamenti in evidenza</h3>
+			<div class="container">
+			<div class="row">
+				
+				<div  v-for="apartment in apartments.filter(a => a.sponsorships && a.sponsorships.length > 0)" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
+					<div class="card my-card p-3">
+					<div class="text-center">
+						<img :src=" apartment.full_image_url " class="card-img-top img-fluid" :alt=" apartment.title ">
+					</div>
+					<h4 class="mb-2 text-center">
+						{{ apartment.title }} 
+					</h4>
+						<div class="d-flex align-items-center justify-content-around text-start my-4">
+							<div>
+								<span class="me-2">Stanze </span>
+								<i class="fa-solid fa-door-closed my-icon me-2"></i>
+								<strong class="fs-5">{{ apartment.rooms }}</strong>
+							</div>
+							<div>
+								<span class="me-2">Letti </span>
+								<i class="fa-solid fa-bed my-icon me-2"></i>
+								<strong class="fs-5">{{ apartment.beds }}</strong>
+							</div>
+							<div>
+								<span class="me-2">Bagni </span>
+								<i class="fa-solid fa-toilet my-icon me-2"></i>
+								<strong class="fs-5">{{ apartment.toilets }}</strong>
+							</div>
+						</div>
+					<div class="text-start h-100">
+							<ul class="mt-2">
+								<li v-for="service, index in apartment.services" :key="index" class="btn btn-outline-warning fw-bold text-dark me-2 m-1 my-lable" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .70rem;">
+									{{ service.service_name }}
+								</li>
+							</ul>
+					</div>
+
+					<div>
+						<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="btn btn-danger w-100">Dettagli</router-link>
+					</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			</div>
+	</div>
     
   </main>
 
@@ -256,11 +290,19 @@ ul {
 //   background: #f0f0f0;
 // }
 
-#jumbotron {
-  background-image: url(/src/assets/img-residenza-scipioni-rome-23.jfif);
-  min-height: 450px;
-  background-size: cover;
-  background-position: center;
+#carouselExample {
+max-height: 600px;
+.carousel-item{
+max-height: 600px;
+	img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: 100% -600px;
+
+		}
+	}
+	
 }
 
 </style>
