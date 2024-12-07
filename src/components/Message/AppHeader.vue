@@ -9,19 +9,21 @@ export default {
 </script>
 
 <template>
-  	<header class="py-1">
+  	<header class="py-3">
 		<div class="container">
 			<div class="row">
 				<div class="col d-flex justify-content-start">
 					<router-link :to="{ name: 'home'}" class="link-logo">
-						<img src="/src/assets/boolbnbnew.png" alt="boolbnb" class="img-fluid">
+						<div class="d-flex align-items-center justify-content-center py-2">
+							<i class="fa-solid fa-door-open me-1 text-warning fa-2x"></i><h4 class="text-dark m-0">BoolBnb</h4>
+						</div>
 					</router-link>
 				</div>
 				<div class="col d-flex justify-content-end align-items-center">
 					<div class="d-flex align-items-center">
-						<i class="fa-solid fa-user"></i>
 						<a href="http://127.0.0.1:8000/login" target="_blank" rel="noopener noreferrer" class="btn btn-apartment">
-							Login
+							<i class="fa-solid fa-user me-1 text-warning"></i>
+							<span class="fw-bold">Login</span>
 						</a>
 					</div>
 				</div>
