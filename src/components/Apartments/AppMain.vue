@@ -316,6 +316,7 @@ methods: {
 						class="form-control my-input me-2"
 						id="input-address"
 						type="number"
+						min="0"
 						v-model="radius"
 						placeholder="Raggio (km)"
 						
@@ -323,14 +324,14 @@ methods: {
 				
 				
 					<label for="rooms" class=" me-2">Stanze</label>
-					<input type="number" class="form-control my-input me-2" name="rooms"  id="rooms" v-model="rooms">
+					<input type="number" class="form-control my-input me-2" name="rooms" min="0"  id="rooms" v-model="rooms">
 				
 					<label for="beds" class="me-2">Letti</label>
-					<input type="number" class="form-control  my-input me-2" name="beds" id="beds" v-model="beds">
+					<input type="number" class="form-control  my-input me-2" name="beds" min="0"  id="beds" v-model="beds">
 				
 				
 					<label for="toilets" class="me-2">Bagni</label>
-					<input type="number" class="form-control my-input me-2" name="toilets" id="toilets" v-model="toilets">
+					<input type="number" class="form-control my-input me-2" name="toilets" min="0"  id="toilets" v-model="toilets">
 				
 			</div>
 			<!-- <div class="col-12 col-lg-3 justify-content-start align-items-center d-flex py-2">
@@ -387,7 +388,7 @@ methods: {
 									<img :src=" apartment.full_image_url " class="img-fluid mb-2" :alt=" apartment.title ">
 								</div>
 								<h4 class="fw-bold mb-1">
-									{{ apartment.title }} 
+									{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km) 
 								</h4>
 								<strong class="mb-1">
 									{{ apartment.address }} 

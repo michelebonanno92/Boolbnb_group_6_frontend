@@ -255,14 +255,14 @@ ul {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 10px;
 //   box-shadow: 5px 5px 10px 3px lightgray;
   &:hover{
     box-shadow: 5px 5px 10px 12px lightgray;
     
   }
   img {
-	border-radius: 20px;
+	border-radius: 10px;
 
   }
 	
