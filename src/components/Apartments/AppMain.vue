@@ -384,8 +384,8 @@ methods: {
 					<div v-for="apartment in filteredApartments" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-4 mb-3">
 						<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="apartment-card-link text-dark">
 							<div class="my-card p-3">
-								<div class="text-center mb-1">
-									<img :src=" apartment.full_image_url " class="img-fluid mb-2" :alt=" apartment.title ">
+								<div class="text-center my-img-container mb-2">
+									<img :src=" apartment.full_image_url " class="img-fluid my-img mb-2" :alt=" apartment.title ">
 								</div>
 								<h4 class="fw-bold mb-1">
 									{{ apartment.title }} ({{ apartment.distance.toFixed(2) }} km) 
@@ -437,8 +437,8 @@ methods: {
 
 					<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="apartment-card-link text-dark">
 						<div class="my-card p-3">
-								<div class="text-center mb-1">
-									<img :src=" apartment.full_image_url " class="img-fluid mb-2" :alt=" apartment.title ">
+								<div class="text-center my-img-container mb-2">
+									<img :src=" apartment.full_image_url " class="img-fluid my-img mb-2" :alt=" apartment.title ">
 								</div>
 								<h4 class="fw-bold mb-1">
 									{{ apartment.title }} 
@@ -563,29 +563,14 @@ h1 {
   border-radius: 4px;
 }
 
-// .suggestions-list {
-//   list-style: none;
-//   padding: 0;
-//   margin: 0;
-//   background: white;
-//   border: 1px solid #ccc;
-//   max-height: 200px;
-//   overflow-y: auto;
-//   position: absolute;
-//   width: 100%;
-//   z-index: 1;
-// }
+.my-img-container {
+  height: 300px;
+  .my-img {
+    width: 100%; /* L'immagine occupa tutta la larghezza */
+    height: 100%; /* L'immagine occupa tutta l'altezza del carosello */
+    object-fit: cover; /* Riempi il contenitore mantenendo le proporzioni */
+    object-position: center; /* Centra l'immagine */
+  }
+}
 
-// .suggestions-list li {
-//   padding: 8px;
-//   cursor: pointer;
-// }
-
-// .suggestions-list li:hover {
-//   background: #f0f0f0;
-// }
-
-// .completed {
-//   text-decoration: line-through;
-// }
 </style>
