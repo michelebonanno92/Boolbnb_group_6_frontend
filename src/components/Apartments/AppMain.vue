@@ -565,6 +565,7 @@ h1 {
 
 .my-img-container {
   height: 250px;
+  min-height: 250px;
   .my-img {
     width: 100%; /* L'immagine occupa tutta la larghezza */
     height: 100%; /* L'immagine occupa tutta l'altezza del carosello */
