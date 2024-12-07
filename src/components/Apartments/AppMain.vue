@@ -295,8 +295,8 @@ methods: {
 	<main>
 
   	<div class="container mt-4">
-		<div class="row mb-4">
-			<div class="col-12 col-lg-3 d-flex align-items-center py-2">
+		<div class="row  mb-4">
+			<div class="col-12 col-lg-3 d-flex align-items-center py-2 mb-2 mb-2">
 				<a class="navbar-brand align-items-center" href="#">Ricerca appartamenti</a>
 					<div class="btn-group">
 						<button type="button" class="btn btn-outline-dark mx-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -309,7 +309,7 @@ methods: {
 						</ul>
 					</div>
 			</div>
-			<div class="col-12 col-lg-3 justify-content-start align-items-center d-flex py-2">
+			<div class="col-12 col-lg-6 justify-content-start align-items-center d-flex flex-grow-1 py-0 ms-2 mb-2 ">
 				
 					<label for="input-address" class="me-2">Distanza:</label>
 					<input
@@ -325,9 +325,6 @@ methods: {
 					<label for="rooms" class=" me-2">Stanze</label>
 					<input type="number" class="form-control my-input me-2" name="rooms"  id="rooms" v-model="rooms">
 				
-			</div>
-			<div class="col-12 col-lg-3 justify-content-start align-items-center d-flex py-2">
-				
 					<label for="beds" class="me-2">Letti</label>
 					<input type="number" class="form-control  my-input me-2" name="beds" id="beds" v-model="beds">
 				
@@ -336,7 +333,17 @@ methods: {
 					<input type="number" class="form-control my-input me-2" name="toilets" id="toilets" v-model="toilets">
 				
 			</div>
-			<div class="col-12 col-lg-3 py-2">
+			<!-- <div class="col-12 col-lg-3 justify-content-start align-items-center d-flex py-2">
+				
+					<label for="beds" class="me-2">Letti</label>
+					<input type="number" class="form-control  my-input me-2" name="beds" id="beds" v-model="beds">
+				
+				
+					<label for="toilets" class="me-2">Bagni</label>
+					<input type="number" class="form-control my-input me-2" name="toilets" id="toilets" v-model="toilets">
+				
+			</div> -->
+			<div class="col-12 col-lg-2  justify-self-end pe-0 mt-2">
 				<button type="submit" @click="search" class="btn btn-warning w-100">Cerca</button>
 			</div>
 
