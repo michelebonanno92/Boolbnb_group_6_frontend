@@ -11,6 +11,7 @@ export default {
       apartment: [],
       marker: null,
       map: null,
+	  apartmentTitle: null,
       apartamentLat: null,
       apartmentLong: null,
       apartmentId: null,
@@ -30,6 +31,7 @@ export default {
         .then((res) => {
           this.apartmentId = res.data.apartment.id;
           this.apartment = res.data.apartment;
+		  this.apartmentTitle = res.data.apartment.title
           this.apartamentLat = parseFloat(res.data.apartment.latitude);
           this.apartmentLong = parseFloat(res.data.apartment.longitude);
           console.log("Latitudine:", this.apartamentLat, "Longitudine:", this.apartmentLong);
@@ -50,8 +52,10 @@ export default {
 
       // Aggiungi il marker al centro della mappa
       map.on('load', () => {
+		const popup = new tt.Popup({ offset: 30 }).setText(this.apartmentTitle);
         this.marker = new tt.Marker({ draggable: false }) // Marker non trascinabile
           .setLngLat([this.apartmentLong, this.apartamentLat]) // Passa correttamente la longitudine e latitudine
+		  .setPopup(popup) // Mostra il popup al clic
           .addTo(map);
         console.log('Marker aggiunto:', this.marker);
       });
