@@ -98,68 +98,87 @@ export default {
 
 	<div class="container text-center mb-5">
 		<div class="row">
-			<div  class="col-12 col-md-8 offset-md-2">
-				<div class="card p-4">
-
-					<h4 class="fs-2 fw-bold">
-						{{ apartment.title }}
-					</h4>
+			<div class="col-12">
+				<h4 class="fs-2 fw-bold">
+					{{ apartment.title }}
+				</h4>
 					
-					<p>
-						<i class="fa-solid fa-location-dot text-danger me-1"></i>
-						<span>{{ apartment.address }}</span>
-					</p>
+				<p class="mt-1">
+					<i class="fa-solid fa-location-dot text-danger"></i>
+					<span>{{ apartment.address }}</span>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div  class="col-12 col-md-6">
+				<div class="p-4">
 
 					<div v-if="apartment.image" class="mb-4">
 							<img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid rounded">
 					</div>
 					
-					<p class="text-start">
-						{{ apartment.description }}
-					</p>
 					
-					<div class="map w-100" id="map"></div>
-
-					<div class="d-flex align-items-center justify-content-around text-start my-4">
-						<div>
-							<span class="me-2">Stanze </span>
-							<i class="fa-solid fa-door-closed my-icon me-2"></i>
-							<strong class="fs-5">{{ apartment.rooms }}</strong>
-						</div>
-						<div>
-							<span class="me-2">Letti </span>
-							<i class="fa-solid fa-bed my-icon me-2"></i>
-							<strong class="fs-5">{{ apartment.beds }}</strong>
-						</div>
-						<div>
-							<span class="me-2">Bagni </span>
-							<i class="fa-solid fa-toilet my-icon me-2"></i>
-							<strong class="fs-5">{{ apartment.toilets }}</strong>
-						</div>
-					</div>
-
-
-					<div class="text-start h-100">
-						<ul class="p-0 d-flex flex-wrap">
-							<li v-for="service, index in apartment.services" :key="index" class="fw-bold text-secondary me-3 p-0 my-lable">
-								{{ service.service_name }}
-							</li>
-						</ul>
-					</div>
-					<div class="container d-flex justify-content-around my-4">
-						<div>
-							<router-link :to="{ name: 'apartments'}" class="btn btn-outline-secondary">Torna indietro</router-link>
-						</div>
-						<div>
-							<router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-danger">Invia messaggio</router-link>
-						</div>
-    				</div>
 
 				</div>
 
-			</div>	
+			</div>
+			<div class="col-12 col-md-6">
+				<div class="p-4">
+					<div class="map w-100" id="map"></div>
+				</div>
+			</div>
 		</div>
+		<div class="row p-4">
+			<div class="col-12">
+				<p class="text-start text-secondary fs-5">
+					{{ apartment.description }}
+				</p>
+					
+				<div class="d-flex align-items-center justify-content-around fs-4 text-start my-4">
+					<div>
+						<span class="me-2">Stanze </span>
+						<i class="fa-solid fa-door-closed my-icon me-2"></i>
+						<strong class="fs-5">{{ apartment.rooms }}</strong>
+					</div>
+					<div>
+						<span class="me-2">Letti </span>
+						<i class="fa-solid fa-bed my-icon me-2"></i>
+						<strong class="fs-5">{{ apartment.beds }}</strong>
+					</div>
+					<div>
+						<span class="me-2">Bagni </span>
+						<i class="fa-solid fa-toilet my-icon me-2"></i>
+						<strong class="fs-5">{{ apartment.toilets }}</strong>
+					</div>
+				</div>
+
+
+				<div class="text-start h-100">
+					<h4>
+						Servizi:
+					</h4>
+					<ul class="p-0">
+						<li v-for="service, index in apartment.services" :key="index" class="fw-bold text-secondary me-3 p-0 my-lable">
+							{{ service.service_name }}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="container d-flex justify-content-around my-4">
+						<div class="w-50 px-2">
+							<router-link :to="{ name: 'apartments'}" class="btn btn-outline-secondary btn-lg w-100">Torna indietro</router-link>
+						</div>
+						<div class="w-50 px-2">
+							<router-link :to="{ name: 'message'}" @click="getPush" class="btn btn-danger btn-lg w-100">Invia messaggio</router-link>
+						</div>
+					</div>
+				</div>
+			</div>
 	</div>
+	
 
   </main>
 
@@ -190,7 +209,7 @@ ul {
 
 #map {
   width: 100%;
-  height: 500px;
+  height: 400px;
   position: relative; /* Garantisce che il marker sia posizionato correttamente */
 }
 

@@ -23,7 +23,7 @@ export default {
 					<div class="d-flex align-items-center">
 						<a href="http://127.0.0.1:8000/login" target="_blank" rel="noopener noreferrer" class="btn btn-apartment">
 							<i class="fa-solid fa-user me-1 text-warning"></i>
-							<span class="fw-bold">Login</span>
+							<span class="d-none d-md-inline-block fw-bold">Login</span>
 						</a>
 					</div>
 				</div>
