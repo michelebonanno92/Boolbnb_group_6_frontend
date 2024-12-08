@@ -176,7 +176,7 @@ export default {
 			<div class="container">
 			<div class="row">
 				
-				<div  v-for="apartment in apartments.filter(a => a.sponsorships && a.sponsorships.length > 0)" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
+				<div  v-for="apartment in apartments.filter(a => a.sponsorships && a.sponsorships.length )" :key="apartment.id" class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4">
 					<router-link :to="{ name: 'apartment-show' , params: { slug: apartment.slug }}" class="apartment-card-link text-dark">
 						<div class="my-card p-3">
 							<div class="text-center my-img-container mb-2">
