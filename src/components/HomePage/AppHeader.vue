@@ -11,7 +11,7 @@ export default {
 <template>
   	<header class="py-3">
 		<div class="container">
-			<div class="row">
+			<div class="row align-items-center">
 				<div class="col d-flex justify-content-start">
 					<router-link :to="{ name: 'home'}" class="link-logo">
 						<div class="d-flex align-items-center justify-content-center py-2">
@@ -24,13 +24,13 @@ export default {
 					<div class="d-flex align-items-center">
 						<router-link :to="{ name: 'apartments'}" class="btn btn-apartment me-4">
 							<i class="fa-solid fa-house-flag me-1 text-warning"></i>
-							<span class="fw-bold">Appartamenti</span>
+							<span class="d-none d-md-inline-block fw-bold">Appartamenti</span>
 						</router-link>
 					</div>
 					<div class="d-flex align-items-center">
 						<a href="http://127.0.0.1:8000/login" target="_blank" rel="noopener noreferrer" class="btn btn-apartment">
 							<i class="fa-solid fa-user me-1 text-warning"></i>
-							<span class="fw-bold">Login</span>
+							<span class="d-none d-md-inline-block fw-bold">Login</span>
 						</a>
 					</div>
 				</div>
