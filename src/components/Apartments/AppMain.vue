@@ -344,7 +344,7 @@ methods: {
 					<input type="number" class="form-control my-input me-2" name="toilets" id="toilets" v-model="toilets">
 				
 			</div>
-			<div class="col-12 col-sm-12 col-lg-2  justify-self-end pe-0 mt-2">
+			<div class="col-12 col-sm-12 col-lg-2 justify-self-end px-2 mt-2">
 				<button type="submit" @click="search" class="btn btn-warning w-100">Cerca</button>
 			</div>
 
