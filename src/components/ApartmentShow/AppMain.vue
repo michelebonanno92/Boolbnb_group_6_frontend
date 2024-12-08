@@ -104,7 +104,7 @@ export default {
 				</h4>
 					
 				<p class="mt-1">
-					<i class="fa-solid fa-location-dot text-danger"></i>
+					<i class="fa-solid me-1 fa-location-dot text-danger"></i>
 					<span>{{ apartment.address }}</span>
 				</p>
 			</div>
@@ -113,8 +113,8 @@ export default {
 			<div  class="col-12 col-md-6">
 				<div class="p-4">
 
-					<div v-if="apartment.image" class="mb-4">
-							<img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid rounded">
+					<div v-if="apartment.image" class="my-img-container mb-4">
+							<img :src="apartment.full_image_url" :alt="apartment.title" class="img-fluid my-img rounded">
 					</div>
 					
 					
@@ -205,6 +205,16 @@ ul {
 		
 		}
   
+}
+
+.my-img-container {
+  height: 400px;
+  .my-img {
+    width: 100%; /* L'immagine occupa tutta la larghezza */
+    height: 100%; /* L'immagine occupa tutta l'altezza del carosello */
+    object-fit: cover; /* Riempi il contenitore mantenendo le proporzioni */
+    object-position: center; /* Centra l'immagine */
+  }
 }
 
 #map {
