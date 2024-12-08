@@ -16,7 +16,7 @@ export default {
       <div class="col-12 col-md-3 d-flex align-items-center justify-content-center justify-content-md-start py-2">© 2024 Boolbnb</div>
 
     <div class="col-12 col-md-6 py-2">
-      <ul class="m-0">
+      <ul class="m-0 p-0">
         <li>Privacy</li>
         <li>Termini</li>
         <li>Mappa del sito</li>
