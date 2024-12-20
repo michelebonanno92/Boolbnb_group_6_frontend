@@ -372,20 +372,20 @@ methods: {
 					<input type="number" class="form-control my-input me-2" name="toilets" id="toilets" v-model="toilets" min="0">
 				
 			</div>
-			<div class="row">
-				<div class="col-12 col-sm-12 col-lg-2  justify-self-end pe-0 mt-2 me-3">
-					<button type="submit" @click="search" class="btn btn-warning w-100">Cerca</button>
-				</div>
+			
+			<div class="col-12 col-sm-12 col-lg-2  justify-self-end pe-3 mt-2  me-3">
+				<button type="submit" @click="search" class="btn btn-warning w-100">Cerca</button>
 			</div>
-			<div class="row">
-				<div class="col-12 col-sm-12 col-lg-2  justify-self-end pe-0 mt-2 me-3">
-					<button type="submit" @click="resetFilter" class="btn btn-danger w-100">Reset Filtri</button>
-				</div>
+			
+			
+			<div class="col-12 col-sm-12 col-lg-2  justify-self-end pe-3 mt-2 me-3">
+				<button type="submit" @click="resetFilter" class="btn btn-danger w-100">Reset Filtri</button>
 			</div>
+			
 		
 		</div>
 		<div class="row ">
-			<div class="my-2 me-3 mb-5 ">
+			<div class="my-2 me-3 mb-5 pe-3">
 			<input
 			v-model="searchQuery"
 			@input="fetchSuggestions"
