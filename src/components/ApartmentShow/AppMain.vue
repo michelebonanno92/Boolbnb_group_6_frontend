@@ -153,7 +153,7 @@ export default {
 				</div>
 
 
-				<div class="text-start h-100">
+				<div class="text-start">
 					<h4>
 						Servizi:
 					</h4>
